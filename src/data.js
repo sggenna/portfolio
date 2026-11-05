@@ -268,7 +268,7 @@ export const STUDIES = {
       { l: 'Timeline', v: 'January 2025 – March 2026' },
       { l: 'Tools', v: 'Figma, React, Claude Code' },
     ],
-    hero: { video: '/assets/bloomin/logo-bloom.mp4', alt: 'The Bloomin’ wordmark, its O’s blooming into flowers as petals fall' },
+    hero: { video: '/assets/bloomin/site-scroll.mp4', poster: '/assets/bloomin/site-scroll-poster.webp', phoneVideo: '/assets/bloomin/site-scroll-phone.mp4', phonePoster: '/assets/bloomin/site-scroll-phone-poster.webp', ratio: '16 / 10', phoneRatio: '390 / 844', big: true, bare: true, alt: 'Scrolling through the Bloomin’ landing page, from the hero through courses, Jamile, how classes work, testimonials, the FAQ and contact' },
     tldr: 'Jamile runs an online English school, and before Bloomin’ all she had was an Instagram page, with no name, logo, or website. I designed the brand and built a mobile-first landing page that answers the questions she used to answer one by one in her DMs. Now I’m designing the platform her students learn on.',
     stats: [
       { v: '20%', l: 'more enrolled students since launch' },
@@ -326,10 +326,7 @@ export const STUDIES = {
             h: 'A website that answers the DMs for her',
             p: 'Jamile wrote short answers to each of the six questions, and I ordered the page to answer them in the order people ask them. It goes from how to start, to the courses, who she is, and how classes work, then testimonials and an FAQ. From anywhere on the page, you’re one tap away from messaging her on WhatsApp.',
             wide: true,
-            media: [
-              { img: '/assets/bloomin/questions-map.webp', w: 2929, h: 1997, alt: 'The six questions on the left, connected by lines to the page sections that answer them on the right' },
-              { scroll: '/assets/bloomin/site-scroll', url: 'bloominenglish.com.br', alt: 'Scrolling through the Bloomin’ landing page, from the hero through courses, Jamile, how classes work, testimonials, the FAQ and contact' },
-            ],
+            media: { img: '/assets/bloomin/questions-map.webp', w: 2929, h: 1997, alt: 'The six questions on the left, connected by lines to the page sections that answer them on the right' },
           },
           {
             h: 'One headline, one button',

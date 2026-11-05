@@ -2,9 +2,8 @@ import { useEffect, useRef, useState } from 'react';
 import Toc from './Toc.jsx';
 import KeyedClip from './KeyedClip.jsx';
 import MistakeJourney from './MistakeJourney.jsx';
-import SiteScroll from './SiteScroll.jsx';
 import { PROCESS, RESULTS, STUDIES, casePath } from '../data.js';
-import { useEnv } from '../hooks/useEnv.js';
+import { useEnv, useMediaQuery } from '../hooks/useEnv.js';
 
 const ease = 'cubic-bezier(.2,.7,.2,1)';
 const SECTIONS = [
@@ -35,7 +34,7 @@ function trackClip({ vw, vh, radius, track }, t) {
 }
 
 // Loops silently while on screen. With reduced motion it waits for the viewer to press play.
-function Clip({ src, label, style, eager, tracked }) {
+function Clip({ src, poster, label, style, eager, tracked }) {
   const { motion } = useEnv();
   const ref = useRef(null);
 
@@ -70,7 +69,7 @@ function Clip({ src, label, style, eager, tracked }) {
     io.observe(v.parentElement);
     return () => io.disconnect();
   }, [motion, src]);
-  return <video ref={ref} src={src} muted loop playsInline preload={eager ? 'auto' : 'metadata'} controls={!motion} aria-label={label} style={style} />;
+  return <video ref={ref} src={src} poster={poster} muted loop playsInline preload={eager ? 'auto' : 'metadata'} controls={!motion} aria-label={label} style={style} />;
 }
 
 // Zooms a video to the `cut` region and masks away everything else.
@@ -128,8 +127,7 @@ function Media({ m }) {
       {m.frame && (motion || !m.stillVideo) && <LiveFrame src={m.frame} w={m.w} h={m.h} title={m.alt} phone={m.phoneFrame} demo={m.demo} />}
       {m.frame && !motion && m.stillVideo && <KeyedClip src={m.stillVideo} label={m.alt} />}
       {m.live === 'mistake-journey' && <MistakeJourney label={m.alt} />}
-      {m.scroll && <SiteScroll base={m.scroll} url={m.url} label={m.alt} />}
-      {m.frame || m.live || m.scroll ? null : m.video
+      {m.frame || m.live ? null : m.video
         ? <Clip src={m.video} label={m.alt} style={m.cut ? cutStyle(m.cut) : undefined} tracked={m.cut?.track ? m.cut : undefined} />
         : <img src={m.img} alt={m.alt} width={m.w} height={m.h} loading="lazy" draggable={false} />}
     </figure>
@@ -214,7 +212,7 @@ function Story({ study }) {
               </div>
               {r.media && (
                 <div className={`cs__media${r.compare || r.beside ? ' cs__media--compare' : ''}${r.beside ? ' cs__media--beside' : ''}${[].concat(r.media).length === 3 ? ' cs__media--three' : ''}`}>
-                  {[].concat(r.media).map((m) => <Media key={m.img || m.video || m.frame || m.live || m.scroll || m.todo} m={m} />)}
+                  {[].concat(r.media).map((m) => <Media key={m.img || m.video || m.frame || m.live || m.todo} m={m} />)}
                 </div>
               )}
             </div>
@@ -232,6 +230,7 @@ function Story({ study }) {
 
 export default function CaseStudy({ project, upNext, phase, full, onToggleFull, onClose, onSwitch }) {
   const { motion, narrow } = useEnv();
+  const phone = useMediaQuery('(max-width: 600px)');
   const scroller = useRef(null);
   const dialog = useRef(null);
   const current = useRef(project);
@@ -328,7 +327,7 @@ export default function CaseStudy({ project, upNext, phase, full, onToggleFull, 
           )}
           <article className="cs__article">
             {/* Written studies keep title, TL;DR, details and video together on the first screen. */}
-            <section id="cs-summary" className={`cs__hero${study ? ' cs__hero--study' : ''}`}>
+            <section id="cs-summary" className={`cs__hero${study ? ' cs__hero--study' : ''}${study?.hero.big ? ' cs__hero--big' : ''}`}>
               <div className="cs__hero-text">
                 <div>
                   <h1 className="cs__h1">{project.name}</h1>
@@ -365,10 +364,10 @@ export default function CaseStudy({ project, upNext, phase, full, onToggleFull, 
                   {study.hero.video
                     ? (
                       <div
-                        className={`cs__hero-media${study.hero.cut ? ' cs__hero-media--cut' : ''}`}
-                        style={study.hero.cut ? { aspectRatio: `${study.hero.cut.w} / ${study.hero.cut.h}` } : study.hero.ratio ? { aspectRatio: study.hero.ratio } : undefined}
+                        className={`cs__hero-media${study.hero.cut ? ' cs__hero-media--cut' : ''}${study.hero.bare ? ' cs__hero-media--bare' : ''}`}
+                        style={study.hero.cut ? { aspectRatio: `${study.hero.cut.w} / ${study.hero.cut.h}` } : study.hero.ratio ? { aspectRatio: phone && study.hero.phoneRatio ? study.hero.phoneRatio : study.hero.ratio } : undefined}
                       >
-                        <Clip src={study.hero.video} label={study.hero.alt} style={study.hero.cut ? cutStyle(study.hero.cut) : undefined} tracked={study.hero.cut?.track ? study.hero.cut : undefined} eager />
+                        <Clip key={phone && study.hero.phoneVideo ? 'phone' : 'wide'} src={phone && study.hero.phoneVideo ? study.hero.phoneVideo : study.hero.video} poster={phone && study.hero.phonePoster ? study.hero.phonePoster : study.hero.poster} label={study.hero.alt} style={study.hero.cut ? cutStyle(study.hero.cut) : undefined} tracked={study.hero.cut?.track ? study.hero.cut : undefined} eager />
                       </div>
                     )
                     : <div className="cs__hero-media"><span>{study.hero.todo}</span></div>}

@@ -423,12 +423,6 @@ button { font: inherit; }
   .cs__shot--cut { width: 100%; }
   .cs__fig--cut { width: max(var(--w, 100%), 70%); }
 }
-.site-scroll { width: 100%; overflow: hidden; border-radius: 12px; background: #f4f0ec; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .08); }
-.site-scroll--phone { max-width: 390px; margin: 0 auto; }
-.site-scroll__bar { display: grid; place-items: center; height: 36px; border-bottom: 1px solid rgba(0, 0, 0, .08); color: var(--muted); font-size: 12px; line-height: 16px; font-weight: 500; }
-.site-scroll__view { position: relative; overflow: hidden; }
-.site-scroll__page { position: relative; width: 100%; will-change: transform; }
-.site-scroll__page img { position: absolute; left: 0; width: 100%; max-width: none; display: block; }
 .cs__live-frame { position: relative; width: 100%; overflow: hidden; }
 .cs__live-frame iframe { position: absolute; left: 0; top: 0; border: 0; background: transparent; transform-origin: 0 0; }
 .cs__media { min-width: 0; display: flex; flex-direction: column; gap: 16px; }
@@ -492,6 +486,9 @@ button { font: inherit; }
 .cs__hero--study { padding: 32px 0 64px; gap: 32px 48px; align-items: start; }
 @media (min-width: 900px) { .cs__hero--study { grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); } }
 @media (min-width: 1280px) { .cs__hero--study { grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); } }
+@media (min-width: 1280px) { .cs__hero--big { grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); } }
+/* Just the screen: no background or hairline around it. */
+.cs__hero-media--bare { background: none; outline: none; }
 .cs__hero--study .cs__hero-text { gap: 24px; }
 .cs__hero--study .cs__h1 { margin-bottom: 8px; font-size: clamp(36px, 3.6vw, 48px); line-height: 1.08; }
 .cs__hero--study .cs__meta { gap: 16px 32px; }
