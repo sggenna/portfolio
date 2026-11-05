@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>html,body{margin:0;height:100%;background:transparent;overflow:hidden;font-family:'Instrument Sans',system-ui,sans-serif}a{color:#781444}a:hover{color:#5C0F34}</style>
+<script>window.OM_SCENES = '[{"name":"Setup","dur":1,"desc":"Both live v12 windows rise in"},{"name":"Select","dur":2,"desc":"Jamile selects She work in a hospital in Bruno’s essay"},{"name":"Tag","dur":2.6,"desc":"Tag bar: Gramática, then she writes the note"},{"name":"Send","dur":1.8,"desc":"Enviar correção; the tag flies into Bruno’s Praticar"},{"name":"Drill","dur":1.8,"desc":"Bruno opens the new exercise"},{"name":"Hold","dur":1.4,"desc":"Zoom out and fade to loop"}]';</script>
+<script>window.OM_PLAYBACK = '{"mode":"loop"}';</script>
+<script>window.TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{"motionEditor":true}/*EDITMODE-END*/;</script>
+<style>html,body{background:transparent!important}</style>
+</helmet>
+<div style="position:fixed;inset:0;display:flex">
+<x-import component-from-global-scope="TagToDrill" from="./case-study/animations-v3.jsx ./case-study/tweaks-panel.jsx ./case-study/tag-to-drill.jsx" hint-size="100%,100%" style="width:100vw;height:100vh">
+<dc-import name="Bloomin Platform v12" inst="t" role="Professora" start-screen="correcoes" start-login="{{ false }}" start-onboarding="{{ false }}" frame-w="1440" hint-size="1440px,900px" style="width:1440px;height:900px"></dc-import>
+<dc-import name="Bloomin Platform v12" inst="s" role="Aluno" start-screen="praticar" start-login="{{ false }}" start-onboarding="{{ false }}" frame-w="1440" hint-size="1440px,900px" style="width:1440px;height:900px"></dc-import>
+</x-import>
+</div>
+</x-dc>
+</body>
+</html>

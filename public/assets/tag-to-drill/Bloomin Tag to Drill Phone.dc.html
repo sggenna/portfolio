@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>html,body{margin:0;height:100%;background:transparent!important;overflow:hidden;font-family:'Instrument Sans',system-ui,sans-serif}a{color:#781444}a:hover{color:#5C0F34}</style>
+<script>window.OM_SCENES = '[{"name":"Setup","dur":1},{"name":"Select","dur":2},{"name":"Tag","dur":2.6},{"name":"Send","dur":1.8},{"name":"Drill","dur":1.8},{"name":"Hold","dur":1.4}]';</script>
+<script>window.OM_PLAYBACK = '{"mode":"loop"}';</script>
+</helmet>
+<div style="position:fixed;inset:0;display:flex">
+<x-import component-from-global-scope="TagToDrillPhone" from="./case-study/animations-v3.jsx ./case-study/tag-to-drill-phone.jsx" hint-size="100%,100%" style="width:100vw;height:100vh">
+<dc-import name="Bloomin Platform v12" inst="t" role="Professora" start-screen="correcoes" start-login="{{ false }}" start-onboarding="{{ false }}" frame-w="390" hint-size="390px,690px" style="width:390px;height:690px"></dc-import>
+<dc-import name="Bloomin Platform v12" inst="s" role="Aluno" start-screen="praticar" start-login="{{ false }}" start-onboarding="{{ false }}" frame-w="390" hint-size="390px,690px" style="width:390px;height:690px"></dc-import>
+</x-import>
+</div>
+</x-dc>
+</body>
+</html>
