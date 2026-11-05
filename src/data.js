@@ -5,7 +5,7 @@ export const PROJECTS = [
   { key: 'plate', slug: 'platepal', name: 'PlatePal', line: 'Meal picks that fit your goals at every Columbia dining hall.', meta: 'Product design · Frontend · 2025', outcome: '93% of testers rated it 5 out of 5', tags: ['0→1'], video: '/assets/platepal/cover.mp4#t=8', poster: '', zoom: 1.16 },
   { key: 'platform', slug: 'bloomin/platform', name: "Bloomin' platform", line: 'One place for an English school to grow.', meta: 'Product design · Frontend · 2025', outcome: '20 min → 90 sec student setup', tags: ['In testing'], video: '/assets/bloomin-platform/cover-teacher-hd.mp4#t=2', fit: '#f5f5f5', framed: true, poster: '' },
   { key: 'bloomin', slug: 'bloomin', name: "Bloomin'", line: 'An English school that grew out of an Instagram page.', meta: 'Branding · Web · 2025', outcome: '20% more enrolled students', tags: ['0→1', 'Branding', 'Shipped'], video: '/assets/bloomin/logo-bloom.mp4#t=2.8', poster: '' },
-  { key: 'dicio', slug: 'diciobase', name: 'Diciobase', line: "Brazil's dictionaries, one search.", meta: 'Product design · Frontend · 2026', outcome: '23→1 steps per lookup', tags: ['Shipping 2026'], video: '', poster: '' },
+  { key: 'dicio', slug: 'diciobase', name: 'Diciobase', line: "Brazil's dictionaries, one search.", meta: 'Product design · Frontend · 2026', outcome: '23→1 steps per lookup', tags: ['Shipping 2026'], video: '', poster: '', soon: true },
 ];
 
 // Written case studies, keyed by project. Projects without one show the template case study.
@@ -338,11 +338,6 @@ export const STUDIES = {
               { img: '/assets/bloomin/testimonial-quote.webp', w: 2640, h: 1624, cap: 'After', alt: 'The same testimonial with its strongest line as a large headline quote and a Read more link' },
             ],
           },
-          {
-            h: 'Petals only show up when it matters',
-            p: 'At first, petals fell across the whole page, but having them everywhere took away their meaning. Now they show up at three moments: when you start scrolling, at the footer, and when you come back to the site after messaging Jamile on WhatsApp. Keeping them to those moments means they’re never distracting and always feel earned.',
-            media: { todo: 'The path through the site, with the three petal moments marked' },
-          },
         ],
       },
       {
@@ -354,7 +349,6 @@ export const STUDIES = {
               'I built the site in React, mobile first. To speed up our workshops, I used Claude Code to spin up working versions of different ideas, like the hero options, so Jamile could click through real versions instead of picturing them from static mockups. It made our feedback sessions faster and more concrete, and kept the decisions anchored in what felt right.',
               'For the petals, tapping the WhatsApp button saves a small flag in the browser. When someone comes back to the site, like hitting back after sending Jamile a message, the site checks for that flag and the petals fall. It’s a small reward for taking the step the whole page is designed around.',
             ],
-            media: { todo: 'On mobile: tap WhatsApp → hit back → petals fall' },
           },
         ],
       },
@@ -368,7 +362,6 @@ export const STUDIES = {
               { lead: '20% more enrolled students', text: 'since the site launched.' },
               { lead: 'Price questions basically stopped.', text: 'Jamile says she barely gets asked about pricing anymore, because the site answers it first.' },
             ],
-            media: { todo: 'A simple results card' },
           },
           {
             h: 'What I learned',

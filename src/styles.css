@@ -173,6 +173,7 @@ button { font: inherit; }
 .card__title { font-size: 20px; line-height: 28px; font-weight: 700; letter-spacing: -.01em; text-wrap: balance; transition: color 200ms ease-out; }
 .card__line { text-wrap: pretty; }
 .card__outcome { font-size: 14px; line-height: 20px; font-weight: 500; }
+.sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 .card__cta { margin-top: 4px; color: var(--magenta); font-size: 14px; line-height: 20px; font-weight: 500; }
 
 /* ---------- about ---------- */

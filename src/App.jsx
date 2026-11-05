@@ -11,7 +11,7 @@ import CaseStudy from './components/CaseStudy.jsx';
 
 const keyFromPath = () => {
   const slug = window.location.pathname.match(/^\/work\/(.+?)\/?$/)?.[1];
-  return PROJECTS.find((p) => p.slug === slug)?.key ?? null;
+  return PROJECTS.find((p) => p.slug === slug && !p.soon)?.key ?? null;
 };
 const pathFor = (key) => casePath(PROJECTS.find((p) => p.key === key));
 
@@ -128,6 +128,7 @@ export default function App() {
     ? PROJECTS
       .map((_, d) => PROJECTS[(PROJECTS.indexOf(project) + d + 1) % PROJECTS.length])
       .slice(0, -1)
+      .filter((p) => !p.soon)
       .sort((a, b) => seen.includes(a.key) - seen.includes(b.key))
       .slice(0, 2)
     : [];

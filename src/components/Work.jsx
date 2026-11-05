@@ -69,11 +69,14 @@ function ProjectCard({ p, hovered, onEnter, onLeave, onOpen }) {
     if (on) wake(v); else sleep(v);
   };
 
+  // A "coming soon" project shows its card but doesn't open.
+  const Card = p.soon ? 'div' : 'a';
+  const link = p.soon ? {} : { href: casePath(p), onClick: (e) => onOpen(p.key, e) };
+
   return (
-    <a
-      href={casePath(p)}
+    <Card
+      {...link}
       className={`card${fine ? ' card--cursor' : ''}`}
-      onClick={(e) => onOpen(p.key, e)}
       onMouseEnter={() => { onEnter(p.key); hoverVideo(true); }}
       onMouseLeave={() => { onLeave(); hoverVideo(false); }}
     >
@@ -92,7 +95,7 @@ function ProjectCard({ p, hovered, onEnter, onLeave, onOpen }) {
             onSeeked={paintStill}
             aria-label={`${p.name} product video`}
           />
-        ) : (
+        ) : !p.soon && (
           <span className="card__placeholder">Product video · 16:9</span>
         )}
         {p.video && (
@@ -124,10 +127,11 @@ function ProjectCard({ p, hovered, onEnter, onLeave, onOpen }) {
         <span className="card__outcome" style={{ color: p.outcome ? '#111' : '#6b6b6b' }}>
           {p.outcome || 'Outcome — add one result'}
         </span>
-        {!fine && <span className="card__cta">View case study →</span>}
+        {fine && p.soon && <span className="sr-only">Coming soon</span>}
+        {!fine && <span className="card__cta">{p.soon ? 'Coming soon' : 'View case study →'}</span>}
       </div>
-      {fine && <Cursor>+ View</Cursor>}
-    </a>
+      {fine && <Cursor>{p.soon ? 'Coming soon' : '+ View'}</Cursor>}
+    </Card>
   );
 }
 
