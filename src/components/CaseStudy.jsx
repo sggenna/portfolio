@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import Toc from './Toc.jsx';
 import KeyedClip from './KeyedClip.jsx';
 import MistakeJourney from './MistakeJourney.jsx';
+import SiteScroll from './SiteScroll.jsx';
 import { PROCESS, RESULTS, STUDIES, casePath } from '../data.js';
 import { useEnv } from '../hooks/useEnv.js';
 
@@ -127,7 +128,8 @@ function Media({ m }) {
       {m.frame && (motion || !m.stillVideo) && <LiveFrame src={m.frame} w={m.w} h={m.h} title={m.alt} phone={m.phoneFrame} demo={m.demo} />}
       {m.frame && !motion && m.stillVideo && <KeyedClip src={m.stillVideo} label={m.alt} />}
       {m.live === 'mistake-journey' && <MistakeJourney label={m.alt} />}
-      {m.frame || m.live ? null : m.video
+      {m.scroll && <SiteScroll base={m.scroll} url={m.url} label={m.alt} />}
+      {m.frame || m.live || m.scroll ? null : m.video
         ? <Clip src={m.video} label={m.alt} style={m.cut ? cutStyle(m.cut) : undefined} tracked={m.cut?.track ? m.cut : undefined} />
         : <img src={m.img} alt={m.alt} width={m.w} height={m.h} loading="lazy" draggable={false} />}
     </figure>
@@ -212,7 +214,7 @@ function Story({ study }) {
               </div>
               {r.media && (
                 <div className={`cs__media${r.compare || r.beside ? ' cs__media--compare' : ''}${r.beside ? ' cs__media--beside' : ''}${[].concat(r.media).length === 3 ? ' cs__media--three' : ''}`}>
-                  {[].concat(r.media).map((m) => <Media key={m.img || m.video || m.frame || m.live || m.todo} m={m} />)}
+                  {[].concat(r.media).map((m) => <Media key={m.img || m.video || m.frame || m.live || m.scroll || m.todo} m={m} />)}
                 </div>
               )}
             </div>

@@ -423,6 +423,12 @@ button { font: inherit; }
   .cs__shot--cut { width: 100%; }
   .cs__fig--cut { width: max(var(--w, 100%), 70%); }
 }
+.site-scroll { width: 100%; overflow: hidden; border-radius: 12px; background: #f4f0ec; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .08); }
+.site-scroll--phone { max-width: 390px; margin: 0 auto; }
+.site-scroll__bar { display: grid; place-items: center; height: 36px; border-bottom: 1px solid rgba(0, 0, 0, .08); color: var(--muted); font-size: 12px; line-height: 16px; font-weight: 500; }
+.site-scroll__view { position: relative; overflow: hidden; }
+.site-scroll__page { position: relative; width: 100%; will-change: transform; }
+.site-scroll__page img { position: absolute; left: 0; width: 100%; max-width: none; display: block; }
 .cs__live-frame { position: relative; width: 100%; overflow: hidden; }
 .cs__live-frame iframe { position: absolute; left: 0; top: 0; border: 0; background: transparent; transform-origin: 0 0; }
 .cs__media { min-width: 0; display: flex; flex-direction: column; gap: 16px; }
@@ -444,12 +450,13 @@ button { font: inherit; }
 .cs__body strong { color: var(--ink); font-weight: 500; }
 .cs__bullets + .cs__body { margin-top: 24px; }
 .cs__live {
-  display: inline-flex; align-items: center; gap: 6px; margin-top: 16px; padding: 8px 16px; border-radius: 999px;
-  background: var(--ink); color: #fff; font-size: 14px; line-height: 20px; font-weight: 500;
-  transition: background-color 200ms ease-out, transform 150ms ease-out;
+  display: inline-flex; align-items: center; gap: 4px; margin-top: 8px; padding: 4px 0;
+  color: var(--magenta); font-size: 14px; line-height: 20px; font-weight: 500;
 }
-.cs__live:hover { background: var(--magenta); color: #fff; }
-.cs__live:active { transform: scale(.96); }
+.cs__live span { transition: transform 200ms var(--ease); }
+.cs__live:hover { color: var(--plum); }
+.cs__live:hover span { transform: translate(2px, -2px); }
+.cs__live:active { color: var(--plum); }
 .cs__list { margin: 0 0 24px; display: grid; gap: 12px; }
 .cs__list > div { display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 8px; }
 .cs__list dt { color: var(--magenta); font-size: 14px; line-height: 26px; font-weight: 500; }
