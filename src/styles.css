@@ -1,7 +1,7 @@
 :root {
   --s-4: 4px; --s-8: 8px; --s-16: 16px; --s-24: 24px; --s-32: 32px; --s-48: 48px; --s-64: 64px; --s-96: 96px;
   --t-xs: 12px; --t-sm: 14px; --t-md: 16px; --t-lg: 20px; --t-xl: 32px; --t-2xl: 48px;
-  --magenta: #b21f86; --plum: #6b0054; --ink: #111; --muted: #6b6b6b;
+  --magenta: #b21f86; --plum: #6b0054; --ink: #111; --muted: #6b6b6b; --pink: #f6dfe9; --panel: #fff; --gap: 12px; --panel-radius: 20px;
   --ease: cubic-bezier(.2, .7, .2, 1);
 }
 
@@ -10,7 +10,7 @@
 
 *, *::before, *::after { box-sizing: border-box; }
 html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
-body { margin: 0; background: #fbf8f5; }
+body { margin: 0; background: var(--pink); }
 /* One focus ring for keyboard users, everywhere. */
 a:focus-visible, button:focus-visible { outline: 2px solid var(--magenta); outline-offset: 3px; border-radius: 4px; }
 /* Photos and screens get a hairline so their light edges don't melt into the cream page. */
@@ -69,25 +69,25 @@ button { font: inherit; }
 
 /* ---------- layout ---------- */
 .app {
-  height: 100vh; overflow: hidden; display: flex; flex-direction: row;
+  height: 100vh; overflow: hidden; display: flex; flex-direction: row; gap: var(--gap); padding: var(--gap);
   font-family: 'EnDash', 'Satoshi', 'Inter', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px; font-weight: 400;
-  color: var(--ink); background: #fbf8f5;
+  color: var(--ink); background: var(--pink);
 }
-.app.is-narrow { height: auto; overflow: visible; flex-direction: column; }
+.app.is-narrow { height: auto; overflow: visible; flex-direction: column; gap: 8px; padding: 8px; }
 
 .main {
-  flex: 1 1 auto; min-width: 0; height: 100vh; overflow-x: hidden; overflow-y: auto; overscroll-behavior: contain;
-  padding: 48px 32px 64px 16px;
+  flex: 1 1 auto; min-width: 0; min-height: 0; overflow-x: hidden; overflow-y: auto; overscroll-behavior: contain;
+  padding: 32px 32px 64px; border-radius: var(--panel-radius); background: var(--panel); scrollbar-width: none;
 }
 .main.is-locked { overflow-y: hidden; }
-.is-narrow .main { height: auto; overflow: visible; padding: 32px 16px 64px; }
+.is-narrow .main { overflow: hidden; padding: 24px 16px 64px; border-radius: 16px; }
 
 /* ---------- sidebar ---------- */
 .sidebar {
-  height: 100vh; width: calc(27% + 24px); min-width: 332px; max-width: 440px; flex: none;
+  min-height: 0; width: calc(27% + 24px); min-width: 332px; max-width: 440px; flex: none;
   padding: 48px; padding-top: clamp(24px, 6vh, 48px);
   display: flex; flex-direction: column; overflow-x: hidden; overflow-y: auto; scrollbar-width: none;
-  background: #faf3f6;
+  border-radius: var(--panel-radius); background: var(--panel);
 }
 @media (max-height: 860px) { .sidebar { padding-right: 32px; padding-bottom: 32px; padding-left: 32px; } }
 @media (max-height: 740px) { .sidebar { padding-bottom: 24px; } }
@@ -131,7 +131,7 @@ button { font: inherit; }
 .sidebar__link::before, .sidebar__contact a::before { content: ''; position: absolute; inset: -4px -8px; }
 
 /* ---------- mobile header ---------- */
-.mheader { display: flex; flex-direction: column; align-items: center; padding: var(--s-24) var(--s-16) 0; text-align: center; }
+.mheader { display: flex; flex-direction: column; align-items: center; padding: var(--s-24) var(--s-16); text-align: center; border-radius: 16px; background: var(--panel); }
 .mheader__avatar { width: 96px; display: block; }
 .mheader__name { margin-top: 16px; white-space: nowrap; font-weight: 700; font-size: 36px; line-height: 1; letter-spacing: -.03em; color: #4a1538; }
 .mheader__school { margin-top: 8px; color: var(--muted); font-size: 14px; line-height: 20px; font-weight: 500; }
@@ -285,7 +285,7 @@ button { font: inherit; }
 /* ---------- footer ---------- */
 .footer {
   position: relative; display: flex; flex-direction: column; background: #faf3f6;
-  margin: 96px -32px -64px -16px; padding: 64px 32px 32px 16px;
+  margin: 96px -32px -64px; padding: 64px 32px 32px;
 }
 .is-narrow .footer { margin: 96px -16px -64px; padding: 64px 16px 32px; }
 .footer__flourish { position: absolute; left: 50%; top: 0; transform: translate(-50%, -50%); display: block; }
@@ -399,7 +399,7 @@ button { font: inherit; }
 
 .cs__hero-media video { width: 100%; height: 100%; object-fit: cover; display: block; }
 .cs__hero-media--cut {
-  position: relative; align-self: center; height: clamp(295px, calc(100vh - 300px), 640px); border-radius: 0; background: none; outline: none;
+  position: relative; align-self: center; height: clamp(295px, calc(100vh - 400px), 640px); border-radius: 0; background: none; outline: none;
 }
 
 /* written case studies */
@@ -493,13 +493,14 @@ button { font: inherit; }
 .cs__hero--study .cs__h1 { margin-bottom: 8px; font-size: clamp(36px, 3.6vw, 48px); line-height: 1.08; }
 .cs__hero--study .cs__meta { gap: 16px 32px; }
 .cs__hero--study .cs__meta dd { font-size: 14px; line-height: 20px; }
+/* Same as the section labels, like "01 / Research". */
+.cs__tldr-title { margin: 0; color: var(--magenta); font-size: 20px; line-height: 28px; font-weight: 500; letter-spacing: .06em; text-transform: uppercase; }
 .cs__tldr p { margin: 8px 0 0; line-height: 24px; text-wrap: pretty; }
 .cs__hero-side { min-width: 0; display: flex; flex-direction: column; gap: 16px; }
-.cs__hero-side .cs__result { padding: 16px 0 0; }
-.cs__hero-side .cs__result strong { font-size: 32px; line-height: 38px; }
-.cs__hero-side .cs__result span { margin-top: 4px; }
-.cs__hero-side .cs__stats { gap: 16px 32px; grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); }
-.cs__impact { display: flex; flex-direction: column; gap: 8px; }
+.cs__stats--top .cs__result { padding: 16px 16px 20px; border: 0; border-radius: 16px; background: var(--panel); }
+.cs__stats--top .cs__result strong { font-size: 40px; line-height: 44px; color: var(--magenta); }
+.cs__stats--top .cs__result span { margin-top: 8px; }
+.cs__stats--top { gap: 12px; grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); }
 .cs__section--story > .eyebrow { font-size: 20px; line-height: 28px; letter-spacing: .06em; }
 
 .cs__next { display: grid; grid-template-columns: minmax(0, 1fr); gap: 24px; margin-top: 24px; align-items: start; }

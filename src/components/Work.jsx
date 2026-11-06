@@ -80,7 +80,7 @@ function ProjectCard({ p, hovered, onEnter, onLeave, onOpen }) {
       onMouseEnter={() => { onEnter(p.key); hoverVideo(true); }}
       onMouseLeave={() => { onLeave(); hoverVideo(false); }}
     >
-      <div className={`card__media${p.framed ? ' media-framed' : ''}`} style={{ transform: lift ? 'translateY(-4px)' : 'none', background: p.fit }}>
+      <div className={`card__media${p.framed ? ' media-framed' : ''}`} style={{ transform: lift ? 'translateY(-4px)' : 'none', background: p.color || p.fit }}>
         {p.video ? (
           <video
             ref={video}

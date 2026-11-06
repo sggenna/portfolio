@@ -2,10 +2,10 @@
 // `zoom` scales the video past black bars baked into the file (e.g. 1.16 for a 1920×936 picture inside 1920×1080).
 // A `#t=<seconds>` on `video` picks the frame the card rests on before it plays.
 export const PROJECTS = [
-  { key: 'plate', slug: 'platepal', name: 'PlatePal', line: 'Meal picks that fit your goals at every Columbia dining hall.', meta: 'Product design · Frontend · 2025', outcome: '93% of testers rated it 5 out of 5', tags: ['0→1'], video: '/assets/platepal/cover.mp4#t=8', poster: '', zoom: 1.16 },
-  { key: 'platform', slug: 'bloomin/platform', name: "Bloomin' platform", line: 'One place for an English school to grow.', meta: 'Product design · Frontend · 2025', outcome: '20 min → 90 sec student setup', tags: ['In testing'], video: '/assets/bloomin-platform/cover-teacher-hd.mp4#t=2', fit: '#f5f5f5', framed: true, poster: '' },
+  { key: 'plate', slug: 'platepal', name: 'PlatePal', line: 'Meal picks that fit your goals at every Columbia dining hall.', meta: 'Product design · Frontend · 2025', outcome: '93% of testers rated it 5 out of 5', tags: ['0→1'], video: '/assets/platepal/cover-solid.mp4#t=8', color: '#2f6f4f', poster: '', zoom: 1.16 },
+  { key: 'platform', slug: 'bloomin/platform', name: "Bloomin' platform", line: 'One place for an English school to grow.', meta: 'Product design · Frontend · 2025', outcome: '20 min → 90 sec student setup', tags: ['In testing'], video: '/assets/bloomin-platform/cover-teacher-hd.mp4#t=2', fit: '#781444', framed: true, poster: '' },
   { key: 'bloomin', slug: 'bloomin', name: "Bloomin'", line: 'An English school that grew out of an Instagram page.', meta: 'Branding · Web · 2025', outcome: '20% more enrolled students', tags: ['0→1', 'Branding', 'Shipped'], video: '/assets/bloomin/logo-bloom.mp4#t=2.8', poster: '' },
-  { key: 'dicio', slug: 'diciobase', name: 'Diciobase', line: "Brazil's dictionaries, one search.", meta: 'Product design · Frontend · 2026', outcome: '23→1 steps per lookup', tags: ['Shipping 2026'], video: '', poster: '', soon: true },
+  { key: 'dicio', slug: 'diciobase', name: 'Diciobase', line: "Brazil's dictionaries, one search.", meta: 'Product design · Frontend · 2026', outcome: '23→1 steps per lookup', tags: ['Shipping 2026'], video: '', color: '#f2b632', poster: '', soon: true },
 ];
 
 // Written case studies, keyed by project. Projects without one show the template case study.
@@ -269,7 +269,7 @@ export const STUDIES = {
       { l: 'Tools', v: 'Figma, React, Claude Code' },
     ],
     hero: { video: '/assets/bloomin/site-scroll.mp4', poster: '/assets/bloomin/site-scroll-poster.webp', phoneVideo: '/assets/bloomin/site-scroll-phone.mp4', phonePoster: '/assets/bloomin/site-scroll-phone-poster.webp', ratio: '16 / 10', phoneRatio: '390 / 844', big: true, bare: true, alt: 'Scrolling through the Bloomin’ landing page, from the hero through courses, Jamile, how classes work, testimonials, the FAQ and contact' },
-    tldr: 'Jamile runs an online English school, and before Bloomin’ all she had was an Instagram page, with no name, logo, or website. I designed the brand and built a mobile-first landing page that answers the questions she used to answer one by one in her DMs. Now I’m designing the platform her students learn on.',
+    tldr: 'Jamile ran her English school entirely out of Instagram DMs. I designed her brand and built a mobile-first landing page that answers students’ questions before they ask, and now I’m designing the platform they’ll learn on.',
     stats: [
       { v: '20%', l: 'more enrolled students since launch' },
       { v: '80%', l: 'fewer students asking the same questions' },

@@ -21,7 +21,7 @@ const COMPACT_H = 436;
 const STACK_GAP = 16, STACK_PAD = 20;
 const STACK_H = STACK_PAD * 2 + 5 * 270 + 4 * STACK_GAP;
 
-const MJ = { P: '#781444', INK: '#221419', MUTED: '#6B5860', LINE: '#E3D8D2', OK: '#2F6337', OKBG: '#E3EFE4', TINT: '#F6E3EC', FONT: 'Figtree, system-ui, sans-serif' };
+const MJ = { P: '#781444', INK: '#221419', MUTED: '#6B5860', LINE: '#E3D8D2', OK: '#2F6337', OKBG: '#E3EFE4', TINT: '#F6E3EC', FONT: "'EnDash', 'Satoshi', 'Inter', Helvetica, Arial, sans-serif" };
 const clamp = (v, min, max) => Math.max(min, Math.min(max, v));
 const lerp = (a, b, p) => a + (b - a) * p;
 const easeOutCubic = (t) => (t - 1) ** 3 + 1;

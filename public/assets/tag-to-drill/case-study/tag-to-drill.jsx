@@ -1,5 +1,5 @@
 const MOTION = { enter: Easing.easeOutCubic, move: Easing.easeInOutCubic, pop: Easing.easeOutBack };
-const F = "'Instrument Sans', system-ui, sans-serif";
+const F = "'Satoshi', 'Inter', Helvetica, Arial, sans-serif";
 const L = (a, b, p) => a + (b - a) * p;
 const LIVE = { w: 1440, h: 900 }, LS = 0.625, WX = [40, 980], WY = 283;
 const PHRASE = 'She work in a hospital', NOTE = 'He/she + verbo com -s: she works';

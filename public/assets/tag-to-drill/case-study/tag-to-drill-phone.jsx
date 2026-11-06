@@ -1,7 +1,7 @@
 // Phone cut of tag-to-drill.jsx: the same story and timing, on the app's real phone layouts.
 // Only one window fits, so the camera slides from Jamile to Bruno as the tag flies across.
 const MOTION = { enter: Easing.easeOutCubic, move: Easing.easeInOutCubic, pop: Easing.easeOutBack };
-const F = "'Instrument Sans', system-ui, sans-serif";
+const F = "'Satoshi', 'Inter', Helvetica, Arial, sans-serif";
 const L = (a, b, p) => a + (b - a) * p;
 const VIEW = { w: 430, h: 770 }, LIVE = { w: 390, h: 690 }, STEP = 430, WX = [20, 20 + STEP], WY = 56;
 const BAR_LEFT = 4;

@@ -333,7 +333,6 @@ export default function CaseStudy({ project, upNext, phase, full, onToggleFull, 
                   <h1 className="cs__h1">{project.name}</h1>
                   {study ? (
                     <>
-                      <p className="cs__lede"><strong>{study.lede}</strong></p>
                       {study.live && (
                         <a className="cs__live" href={study.live} target="_blank" rel="noreferrer">Try it live <span aria-hidden="true">↗</span></a>
                       )}
@@ -346,7 +345,7 @@ export default function CaseStudy({ project, upNext, phase, full, onToggleFull, 
                 </div>
                 {study && (
                   <div className="cs__tldr">
-                    <Label>TL;DR</Label>
+                    <h2 className="cs__tldr-title">TL;DR</h2>
                     <p>{study.tldr}</p>
                   </div>
                 )}
@@ -372,16 +371,13 @@ export default function CaseStudy({ project, upNext, phase, full, onToggleFull, 
                     )
                     : <div className="cs__hero-media"><span>{study.hero.todo}</span></div>}
                   {study.stats && (
-                    <div className="cs__impact">
-                      <Label>Impact</Label>
-                      <div className="cs__stats">
-                        {study.stats.map((r) => (
-                          <div className="cs__result" key={r.l}>
-                            <strong>{r.v}</strong>
-                            <span>{r.l}</span>
-                          </div>
-                        ))}
-                      </div>
+                    <div className="cs__stats cs__stats--top" aria-label="Impact">
+                      {study.stats.map((r) => (
+                        <div className="cs__result" key={r.l}>
+                          <strong>{r.v}</strong>
+                          <span>{r.l}</span>
+                        </div>
+                      ))}
                     </div>
                   )}
                 </div>
@@ -452,7 +448,7 @@ export default function CaseStudy({ project, upNext, phase, full, onToggleFull, 
               <div className="cs__next">
                 {upNext.map((u) => (
                   <a key={u.key} href={casePath(u)} onClick={(e) => { if (e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1) return; e.preventDefault(); onSwitch(u.key); }}>
-                    <div className={`cs__next-media${u.framed ? ' media-framed' : ''}`} style={{ background: u.fit }}>
+                    <div className={`cs__next-media${u.framed ? ' media-framed' : ''}`} style={{ background: u.color || u.fit }}>
                       {u.video ? (
                         <video
                           src={u.video}
