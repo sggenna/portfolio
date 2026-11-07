@@ -3,6 +3,16 @@ import Toc from './Toc.jsx';
 import KeyedClip from './KeyedClip.jsx';
 import MistakeJourney from './MistakeJourney.jsx';
 import AffinityMap from './AffinityMap.jsx';
+import Cursor from './Cursor.jsx';
+
+function LockIcon() {
+  return (
+    <svg className="lock-icon" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <rect x="3" y="7" width="10" height="7" rx="1.5" />
+      <path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" />
+    </svg>
+  );
+}
 import { PROCESS, RESULTS, STUDIES, casePath } from '../data.js';
 import { useEnv, useMediaQuery } from '../hooks/useEnv.js';
 
@@ -231,7 +241,7 @@ function Story({ study }) {
 }
 
 export default function CaseStudy({ project, upNext, phase, full, onToggleFull, onClose, onSwitch }) {
-  const { motion, narrow } = useEnv();
+  const { motion, narrow, fine } = useEnv();
   const phone = useMediaQuery('(max-width: 600px)');
   const scroller = useRef(null);
   const dialog = useRef(null);
@@ -335,10 +345,18 @@ export default function CaseStudy({ project, upNext, phase, full, onToggleFull, 
                   <h1 className="cs__h1">{project.name}</h1>
                   {study ? (
                     <>
-                      {study.live && (
+                      {study.live && !study.liveLocked && (
                         <a className="cs__live" href={study.live} target="_blank" rel="noreferrer">Try it live <span aria-hidden="true">↗</span></a>
                       )}
-                      {study.note && <p className="cs__note">{study.note}</p>}
+                      {/* Locked: the demo is on request, so the link is a lock, and hovering it says why */}
+                      {study.live && study.liveLocked && (
+                        <span className={`cs__live cs__live--locked${fine ? ' card--cursor' : ''}`} tabIndex={0} aria-describedby="cs-live-note">
+                          Try it live <LockIcon />
+                          {fine && <Cursor><span className="cursor__note"><LockIcon /> {study.note}</span></Cursor>}
+                        </span>
+                      )}
+                      {study.note && (!study.liveLocked || !fine) && <p className="cs__note" id="cs-live-note">{study.note}</p>}
+                      {study.note && study.liveLocked && fine && <span className="sr-only" id="cs-live-note">{study.note}</span>}
                     </>
                   ) : (
                     <p className="cs__lede">
