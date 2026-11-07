@@ -1,9 +1,57 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { EXPERIENCE, THINGS } from '../data.js';
+import { SLOTS } from '../slots.js';
 import { useMediaQuery } from '../hooks/useEnv.js';
 import ImageSlot from './ImageSlot.jsx';
 
-export default function About() {
+// One photo opened large. Phones get the share sheet; with a mouse, the link is copied.
+function PhotoViewer({ thing, fine, onClose }) {
+  const dialog = useRef(null);
+  const copiedTimer = useRef(0);
+  const [copied, setCopied] = useState(false);
+
+  useEffect(() => {
+    const el = dialog.current;
+    el.showModal();
+    return () => { el.close(); clearTimeout(copiedTimer.current); };
+  }, []);
+
+  const share = async () => {
+    const url = window.location.href;
+    try {
+      if (!fine && navigator.share) { await navigator.share({ title: `${thing.short} · Genna Gonzaga`, url }); return; }
+      await navigator.clipboard.writeText(url);
+      setCopied(true);
+      clearTimeout(copiedTimer.current);
+      copiedTimer.current = setTimeout(() => setCopied(false), 2000);
+    } catch { /* share sheet dismissed, or clipboard blocked: the link is still in the address bar */ }
+  };
+
+  return (
+    <dialog
+      ref={dialog}
+      className="viewer"
+      aria-label={thing.cap}
+      onCancel={(e) => { e.preventDefault(); onClose(); }}
+      onClick={(e) => { if (e.target === dialog.current) onClose(); }}
+    >
+      <img className="viewer__img" src={SLOTS[thing.id]} alt={thing.cap} />
+      <div className="viewer__foot">
+        <p className="viewer__cap">{thing.cap}</p>
+        <button type="button" className="viewer__share" onClick={share} aria-live="polite">
+          {copied ? 'Link copied' : fine || !navigator.share ? 'Copy link' : 'Share'}
+        </button>
+      </div>
+      <button type="button" className="viewer__close" aria-label="Close" onClick={onClose}>
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" aria-hidden="true">
+          <path d="m3 3 10 10M13 3 3 13" />
+        </svg>
+      </button>
+    </dialog>
+  );
+}
+
+export default function About({ photo, onOpenPhoto, onClosePhoto }) {
   const fine = useMediaQuery('(hover: hover) and (pointer: fine)');
   const tagRef = useRef(null);
   const [tag, setTag] = useState(null);
@@ -14,6 +62,7 @@ export default function About() {
   };
   const showTag = (text) => (e) => { moveTag(e); setTag(text); };
   const hideTag = () => setTag(null);
+  const opened = THINGS.find((t) => t.slug === photo);
 
   return (
     <div className="about">
@@ -62,19 +111,24 @@ export default function About() {
         <h2 className="about__label">Off screen</h2>
         <div className="things">
           {THINGS.map((t) => (
-            <figure className="thing-wrap" key={t.id}>
-              <div
-                className="thing"
-                onMouseEnter={showTag(t.cap)}
-                onMouseLeave={hideTag}
-                onMouseMove={moveTag}
-              >
-                <ImageSlot id={t.id} placeholder={t.ph} />
-              </div>
-            </figure>
+            <a className="thing-wrap" key={t.id} href={`/about/${t.slug}`} onClick={(e) => onOpenPhoto(t.slug, e)}>
+              <figure className="thing-fig">
+                <div
+                  className="thing"
+                  onMouseEnter={showTag(t.cap)}
+                  onMouseLeave={hideTag}
+                  onMouseMove={moveTag}
+                >
+                  <ImageSlot id={t.id} placeholder={t.ph} alt={t.cap} />
+                </div>
+                <figcaption className="thing-cap">{t.short}</figcaption>
+              </figure>
+            </a>
           ))}
         </div>
       </section>
+
+      {opened && <PhotoViewer key={opened.slug} thing={opened} fine={fine} onClose={onClosePhoto} />}
 
       <span ref={tagRef} className="cursor-tag" aria-hidden="true" style={{ opacity: fine && tag ? 1 : 0 }}>
         {tag}

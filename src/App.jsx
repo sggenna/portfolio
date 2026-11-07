@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { PROJECTS, casePath } from './data.js';
+import { NAV, NAV_PATHS, PROJECTS, THINGS, casePath } from './data.js';
 import { EnvContext, useMediaQuery, useMotion, useNarrow } from './hooks/useEnv.js';
 import Sidebar from './components/Sidebar.jsx';
 import MobileHeader from './components/MobileHeader.jsx';
@@ -14,6 +14,17 @@ const keyFromPath = () => {
   return PROJECTS.find((p) => p.slug === slug && !p.soon)?.key ?? null;
 };
 const pathFor = (key) => casePath(PROJECTS.find((p) => p.key === key));
+const pageFromPath = () => {
+  const { pathname } = window.location;
+  if (/^\/about(\/|$)/.test(pathname)) return 1;
+  return /^\/play\/?$/.test(pathname) ? 2 : 0;
+};
+const photoFromPath = () => {
+  const slug = window.location.pathname.match(/^\/about\/(.+?)\/?$/)?.[1];
+  return THINGS.find((t) => t.slug === slug)?.slug ?? null;
+};
+// Cmd/ctrl/shift/middle-click opens the link in a new tab instead.
+const opensNewTab = (e) => e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1;
 
 // Case studies this visitor has opened, kept in their browser so "Up next" can suggest the rest first.
 const SEEN_KEY = 'gg:seen-cases';
@@ -27,7 +38,10 @@ export default function App() {
   const fine = useMediaQuery('(hover: hover) and (pointer: fine)') && !narrow;
   const mainRef = useRef(null);
 
-  const [active, setActive] = useState(0);
+  const [active, setActive] = useState(pageFromPath);
+  const [photo, setPhoto] = useState(photoFromPath);
+  const activeRef = useRef(active);
+  activeRef.current = active;
   const [hover, setHover] = useState('');
   const [open, setOpen] = useState(keyFromPath);
   const [phase, setPhase] = useState(() => (keyFromPath() ? 'to' : 'idle')); // idle | from | to | back
@@ -37,11 +51,32 @@ export default function App() {
   openRef.current = open;
   const [seen, setSeen] = useState(readSeen);
 
-  const goTo = useCallback((i) => {
+  const showPage = useCallback((i) => {
     setActive(i);
     if (mainRef.current) mainRef.current.scrollTop = 0;
     if (narrow) window.scrollTo(0, 0);
   }, [narrow]);
+
+  const goTo = (i, e) => {
+    if (opensNewTab(e)) return;
+    e.preventDefault();
+    if (window.location.pathname !== NAV_PATHS[i]) window.history.pushState(null, '', NAV_PATHS[i]);
+    showPage(i);
+  };
+
+  const openPhoto = (slug, e) => {
+    if (opensNewTab(e)) return;
+    e.preventDefault();
+    window.history.pushState({ fromSite: true }, '', `/about/${slug}`);
+    setPhoto(slug);
+  };
+
+  const closePhoto = () => {
+    // Same as closing a case study: step back if we opened it, swap the URL if it came from a pasted link.
+    if (window.history.state?.fromSite) { window.history.back(); return; }
+    window.history.replaceState(null, '', '/about');
+    setPhoto(null);
+  };
 
   const show = useCallback((key) => {
     clearTimeout(closeTimer.current);
@@ -63,8 +98,7 @@ export default function App() {
   }, [motion]);
 
   const openCase = (key, e) => {
-    // Let cmd/ctrl/shift/middle-click open the case study's link in a new tab.
-    if (e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1) return;
+    if (opensNewTab(e)) return;
     e.preventDefault();
     window.history.pushState({ fromSite: true }, '', pathFor(key));
     show(key);
@@ -86,8 +120,13 @@ export default function App() {
   }, [hide]);
 
   useEffect(() => {
-    if (window.location.pathname !== '/' && !keyFromPath()) window.history.replaceState(null, '', '/');
+    // Tidy links that don't lead anywhere: an unknown photo goes to About, anything else home.
+    const page = pageFromPath();
+    if (!keyFromPath() && !photoFromPath() && window.location.pathname !== NAV_PATHS[page]) window.history.replaceState(null, '', NAV_PATHS[page]);
     const onPop = () => {
+      const nextPage = pageFromPath();
+      if (nextPage !== activeRef.current) showPage(nextPage);
+      setPhoto(photoFromPath());
       const key = keyFromPath();
       if (!key) hide();
       else if (openRef.current) setOpen(key);
@@ -95,12 +134,13 @@ export default function App() {
     };
     window.addEventListener('popstate', onPop);
     return () => window.removeEventListener('popstate', onPop);
-  }, [show, hide]);
+  }, [show, hide, showPage]);
 
   useEffect(() => {
     const p = PROJECTS.find((x) => x.key === open);
-    document.title = p ? `${p.name} · Genna Gonzaga` : 'Genna Gonzaga';
-  }, [open]);
+    const name = p ? p.name : active ? NAV[active] : '';
+    document.title = name ? `${name} · Genna Gonzaga` : 'Genna Gonzaga';
+  }, [open, active]);
 
   useEffect(() => {
     document.body.style.overflow = open ? 'hidden' : '';
@@ -146,7 +186,7 @@ export default function App() {
           {active === 0 && (
             <Work hover={hover} onHover={setHover} onOpen={openCase} />
           )}
-          {active === 1 && <About />}
+          {active === 1 && <About photo={photo} onOpenPhoto={openPhoto} onClosePhoto={closePhoto} />}
           {active === 2 && <Play />}
           {active !== 2 && <Footer />}
         </main>

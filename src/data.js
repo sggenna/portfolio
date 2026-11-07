@@ -488,6 +488,7 @@ export const STUDIES = {
 export const casePath = (p) => `/work/${p.slug}`;
 
 export const NAV = ['Work', 'About', 'Play'];
+export const NAV_PATHS = ['/', '/about', '/play'];
 
 export const EXPERIENCE = [
   { id: 'logo-richemont', org: 'Richemont', role: 'Software engineering intern', when: 'JUN 2026–NOW', href: 'https://www.richemont.com' },
@@ -495,13 +496,14 @@ export const EXPERIENCE = [
   { id: 'logo-formas', org: 'FORMAS Research Lab, UFBA', role: 'Researcher and product designer', when: 'JUN 2025–MAY 2026', href: '#' },
 ];
 
+// `slug` is the photo's link (/about/<slug>), `short` shows under it on phones, `cap` when it's open or hovered.
 export const THINGS = [
-  { id: 'about-radio', cap: 'On WKCR, aka making people listen to my playlists', ph: 'Photo: doing radio' },
-  { id: 'about-cats', cap: 'Every cat I meet is a friend I haven’t made yet', ph: 'Photo: with a cat' },
-  { id: 'about-drawing', cap: 'Drawing with graphite', ph: 'Photo: drawing' },
-  { id: 'about-sophia', cap: 'Proud cat auntie to Sophia', ph: 'Photo: Sophia' },
-  { id: 'about-food', cap: 'Eating my way through the city', ph: 'Photo: food' },
-  { id: 'about-colorstack', cap: 'Running ColorStack Columbia socials', ph: 'Photo: ColorStack' },
+  { id: 'about-radio', slug: 'radio', short: 'On WKCR', cap: 'On WKCR, aka making people listen to my playlists', ph: 'Photo: doing radio' },
+  { id: 'about-cats', slug: 'cats', short: 'Making cat friends', cap: 'Every cat I meet is a friend I haven’t made yet', ph: 'Photo: with a cat' },
+  { id: 'about-drawing', slug: 'drawing', short: 'Drawing with graphite', cap: 'Drawing with graphite', ph: 'Photo: drawing' },
+  { id: 'about-sophia', slug: 'sophia', short: 'Cat auntie to Sophia', cap: 'Proud cat auntie to Sophia', ph: 'Photo: Sophia' },
+  { id: 'about-food', slug: 'food', short: 'Eating through the city', cap: 'Eating my way through the city', ph: 'Photo: food' },
+  { id: 'about-colorstack', slug: 'colorstack', short: 'ColorStack socials', cap: 'Running ColorStack Columbia socials', ph: 'Photo: ColorStack' },
 ];
 
 export const PROCESS = [
