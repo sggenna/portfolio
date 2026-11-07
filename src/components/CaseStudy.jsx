@@ -336,6 +336,7 @@ export default function CaseStudy({ project, upNext, phase, full, onToggleFull, 
                       {study.live && (
                         <a className="cs__live" href={study.live} target="_blank" rel="noreferrer">Try it live <span aria-hidden="true">↗</span></a>
                       )}
+                      {study.note && <p className="cs__note">{study.note}</p>}
                     </>
                   ) : (
                     <p className="cs__lede">
@@ -360,7 +361,11 @@ export default function CaseStudy({ project, upNext, phase, full, onToggleFull, 
               </div>
               {study ? (
                 <div className="cs__hero-side">
-                  {study.hero.video
+                  {study.hero.frame ? (
+                    <div className="cs__hero-media cs__hero-media--bare" style={{ aspectRatio: phone && study.hero.phoneFrame ? 'auto' : study.hero.ratio }}>
+                      <LiveFrame src={study.hero.frame} w={study.hero.w} h={study.hero.h} title={study.hero.alt} phone={phone ? study.hero.phoneFrame : undefined} demo />
+                    </div>
+                  ) : study.hero.video
                     ? (
                       <div
                         className={`cs__hero-media${study.hero.cut ? ' cs__hero-media--cut' : ''}${study.hero.bare ? ' cs__hero-media--bare' : ''}`}
