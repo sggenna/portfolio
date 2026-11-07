@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { flushSync } from 'react-dom';
 import { NAV, NAV_PATHS, PROJECTS, THINGS, casePath } from './data.js';
 import { EnvContext, useMediaQuery, useMotion, useNarrow } from './hooks/useEnv.js';
 import Sidebar from './components/Sidebar.jsx';
@@ -52,10 +53,16 @@ export default function App() {
   const [seen, setSeen] = useState(readSeen);
 
   const showPage = useCallback((i) => {
-    setActive(i);
-    if (mainRef.current) mainRef.current.scrollTop = 0;
-    if (narrow) window.scrollTo(0, 0);
-  }, [narrow]);
+    const swap = () => {
+      flushSync(() => setActive(i));
+      if (mainRef.current) mainRef.current.scrollTop = 0;
+      if (narrow) window.scrollTo(0, 0);
+    };
+    // Work → About → Play: the page content crossfades and drifts in the direction you're going; the nav stays put.
+    if (!motion || i === activeRef.current || !document.startViewTransition) { swap(); return; }
+    document.documentElement.dataset.nav = i > activeRef.current ? 'forward' : 'back';
+    document.startViewTransition(swap).finished.finally(() => { delete document.documentElement.dataset.nav; });
+  }, [narrow, motion]);
 
   const goTo = (i, e) => {
     if (opensNewTab(e)) return;
