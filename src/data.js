@@ -1,11 +1,12 @@
 // Drop a 16:9 mp4/webm and matching poster into public/ and set `video` / `poster` to show it on the card.
 // `zoom` scales the video past black bars baked into the file (e.g. 1.16 for a 1920×936 picture inside 1920×1080).
 // A `#t=<seconds>` on `video` picks the frame the card rests on before it plays.
+// `frame` puts a live page on the card instead, at its design size; it's told 'play' and 'stop' as the card is hovered.
 export const PROJECTS = [
-  { key: 'plate', slug: 'platepal', name: 'PlatePal', line: 'Meal picks that fit your goals at every Columbia dining hall.', meta: 'Product design · Frontend · 2025', outcome: '93% of testers rated it 5 out of 5', tags: ['0→1'], video: '/assets/platepal/cover-solid.mp4#t=8', color: '#2f6f4f', poster: '', zoom: 1.16 },
   { key: 'platform', slug: 'bloomin/platform', name: "Bloomin' platform", line: 'One place for an English school to grow.', meta: 'Product design · Frontend · 2025', outcome: '20 min → 90 sec student setup', tags: ['In testing'], video: '/assets/bloomin-platform/cover-teacher-hd.mp4#t=2', fit: '#781444', framed: true, poster: '' },
+  { key: 'dicio', slug: 'diciobase', name: 'Diciobase', line: "Brazil's dictionaries, one search.", meta: 'Product design · Frontend · 2026', outcome: '23→1 steps per lookup', tags: ['Shipping 2026'], frame: { src: '/assets/diciobase/demos/search-embed.html', w: 720, h: 405 }, color: '#141414' },
+  { key: 'plate', slug: 'platepal', name: 'PlatePal', line: 'Meal picks that fit your goals at every Columbia dining hall.', meta: 'Product design · Frontend · 2025', outcome: '93% of testers rated it 5 out of 5', tags: ['0→1'], video: '/assets/platepal/cover-solid.mp4#t=8', color: '#2f6f4f', poster: '', zoom: 1.16 },
   { key: 'bloomin', slug: 'bloomin', name: "Bloomin'", line: 'An English school that grew out of an Instagram page.', meta: 'Branding · Web · 2025', outcome: '20% more enrolled students', tags: ['0→1', 'Branding', 'Shipped'], video: '/assets/bloomin/logo-bloom.mp4#t=2.8', poster: '' },
-  { key: 'dicio', slug: 'diciobase', name: 'Diciobase', line: "Brazil's dictionaries, one search.", meta: 'Product design · Frontend · 2026', outcome: '23→1 steps per lookup', tags: ['Shipping 2026'], video: '', color: '#f2b632', poster: '', soon: true },
 ];
 
 // Written case studies, keyed by project. Projects without one show the template case study.
@@ -144,51 +145,58 @@ export const STUDIES = {
     ],
   },
   dicio: {
-    lede: 'Brazil’s dictionaries, one search.',
+    lede: 'Portuguese dictionaries, one search.',
     live: '', // link for the "Try it live" button; it shows once this is filled in
+    note: 'Live demo available on request. In the beta, saved words only last for your session, and there are no accounts yet.',
     meta: [
       { l: 'Role', v: 'Product designer and developer' },
       { l: 'Team', v: 'FORMAS Research Lab' },
       { l: 'Timeline', v: 'June 2025 – May 2026' },
       { l: 'Tools', v: 'Figma, Figma Make, React, Express, MySQL' },
     ],
-    hero: { todo: 'Hero video: typing a word and landing on its entry' },
-    tldr: 'At the FORMAS lab, linguists were checking dictionaries one by one, each with its own site and login, before they could even start their research. So I designed and built Diciobase, which searches all of them at once.',
+    // These demos are built from the Diciobase repo's real screens by its `pnpm build:demos`.
+    hero: {
+      frame: '/assets/diciobase/demos/tour-embed.html',
+      w: 1440,
+      h: 900,
+      ratio: '16 / 10',
+      phoneFrame: { src: '/assets/diciobase/demos/tour-embed.html', w: 358, h: 720 },
+      alt: 'A tour of Diciobase: searching saudade from the orbit home page, switching its entry between three dictionaries, seeing where they agree on a meaning, and following the synonym nostalgia to its own entry.',
+    },
+    tldr: 'Diciobase is a dictionary platform for linguists. You search a Portuguese word once and see what several dictionaries say about it, each in its own original structure.',
     stats: [
-      { v: '4 min', l: 'per lookup in testing, down from a whole morning' },
+      { v: '4 min', l: 'per lookup in early testing, down from a whole morning' },
       { v: '23 → 1', l: 'steps to one search' },
+      { v: '680 → 410 ms', l: 'per search' },
     ],
     chapters: [
       {
-        id: 'cs-problem',
-        label: 'Problem',
+        id: 'cs-research',
+        label: 'Research',
         rows: [
           {
-            h: 'The two hours linguists lost before research began',
+            h: 'Only 4 of 23 steps were actual research',
             quote: 'Before I can actually do research I spend two hours getting data into a readable format.',
             cite: 'PhD researcher, UFBA',
             avatar: false,
-            p: 'One lookup took 23 steps, with a different site and login for every dictionary. All the data was there, people just couldn’t get to it easily.',
+            p: 'I interviewed researchers in Brazil and Portugal and watched them do real lookups. They were working from physical dictionaries, going book by book, and looking up one word took 23 steps. Only 4 of those steps were the research they actually came to do.',
             wide: true,
             media: { img: '/assets/diciobase/task-map-hd.webp', w: 2981, h: 1427, alt: 'Task map of a single lookup: 23 steps across Prepare, Search, Synthesise and Cite' },
           },
-        ],
-      },
-      {
-        id: 'cs-principles',
-        label: 'Principles',
-        rows: [
           {
-            h: 'What dictionary sites get wrong about attention',
+            h: 'The researcher with a secret Python script',
+            p: 'The lab was digitizing these dictionaries, and the digitized entries were still hard to read. One researcher had written her own script that she ran every day just to get them into a format she could use. She’d never told anyone about it. When people build their own tools in secret, the problem is real.',
+          },
+          {
+            h: '“Please don’t clean up our data”',
             quote: 'I care about the word in front of me and where it came from.',
-            cite: 'Master’s student, UC Lisbon',
+            cite: 'Master’s student, University of Lisbon',
             avatar: false,
-            bullets: [
-              { lead: 'Calm screens feel easier to use.', text: 'When I looked at other dictionary sites, what stuck with me most was how overstimulating they were. There were ads, quizzes, games, and a word of the day all pulling me away from the word I actually came for. I still wanted people to explore, so I kept that close to the search, with related words on every entry and suggested words on the home page.' },
-              { lead: 'People learn by using.', text: 'Most people skip tutorials and jump straight in, so the app teaches them as they go.' },
-              { lead: 'One dictionary at a time.', text: 'Each entry is already a lot of information, so showing more than one would bring back the overload I was trying to get rid of.' },
+            p: [
+              'This was the clearest thing I heard across the interviews. Researchers look at different dictionaries because each one builds its entries differently, and those differences are exactly what they study. Merging everything into one format would have taken that away and made Diciobase useless to them.',
+              'So the real question became: how do you put every dictionary in one place and keep what makes each one different?',
             ],
-            media: { todo: 'Diciobase home page, with suggested words under the search bar' },
+            media: { todo: 'Affinity map' },
           },
         ],
       },
@@ -197,48 +205,63 @@ export const STUDIES = {
         label: 'Design',
         rows: [
           {
-            h: 'Every kind of move has its own motion',
-            p: 'Going deeper slides in from the right, switching sections slides sideways, and going from word to word is a soft rise. I wanted people to always know what kind of move they just made without having to think about it.',
-            media: { todo: 'Search, open a word, go back' },
+            h: 'Every dictionary stays exactly as it was written',
+            p: 'I kept each dictionary’s microstructure exactly as it is, all the way down to the database. Every entry has the same parts, in the same order, as the dictionary it came from. That’s what lets the interface show the differences between them.',
           },
           {
-            h: 'Why Diciobase never asks “are you sure?”',
-            p: 'Removing a saved word isn’t a big deal and it’s easy to fix, so a pop-up would just slow everyone down to protect against a mistake that rarely happens. Instead, you get a toast with “Desfazer” (Undo) that puts the word right back where it was.',
-            media: { todo: 'Remove a word from Salvos, then undo' },
+            h: 'The compare view nobody used',
+            p: 'Researchers used to lay their dictionaries open side by side, so my first instinct was a compare view that did the same thing on screen. When I watched people use it, they read one dictionary at a time and never opened compare. It was taking up space, so I dropped it.',
+            media: { todo: 'Compare view prototype' },
           },
           {
-            h: 'The tutorial nobody has to sit through',
-            p: 'Tips only show up once, point at exactly what they’re explaining, and never block the page. I capped them at two per visit so nobody gets the whole tour at once, and you can turn them off or back on in Perfil.',
-            media: { todo: 'First visit, with tips pointing at the search bar' },
+            h: 'One feature was secretly three questions',
+            p: 'Watching them, I realized compare was trying to answer three things at once: what does this dictionary say, how is it built, and do the others agree? So I split it up.',
+            bullets: [
+              { lead: 'What does it say?', text: 'Each dictionary gets its own tab, with a count of its meanings.' },
+              { lead: 'How is it built?', text: 'That’s Estrutura.' },
+              { lead: 'Do the others agree?', text: 'Little dots next to a meaning show which other dictionaries have it too.' },
+            ],
+            media: [
+              { frame: '/assets/diciobase/demos/feature-embed.html?f=tabs', w: 760, h: 380, demo: true, alt: 'Switching between the Wikcionário, Dicionário Aberto and OpenWordnet tabs. Each tab has a count of its meanings, and the definitions change.' },
+              { frame: '/assets/diciobase/demos/feature-embed.html?f=dots', w: 760, h: 220, demo: true, alt: 'Hovering the dot next to a meaning shows “Também em Dicionário Aberto”.' },
+            ],
+          },
+          {
+            h: 'When the structure drowned out the words',
+            p: 'My first Estrutura highlighted every part of the entry right in the text, each in its own color, and it felt overwhelming. So I moved the structure to the margin: a colored label and a thin line beside each part, and a strip at the top with the order that dictionary uses. Now you can read the entry and see how it’s built at the same time.',
+            compare: true,
+            media: [
+              { frame: '/assets/diciobase/demos/feature-embed.html?f=estrutura-before', w: 720, h: 470, demo: true, cap: 'Before', alt: 'The first Estrutura: every part of the entry highlighted inline in its own color.' },
+              { frame: '/assets/diciobase/demos/feature-embed.html?f=estrutura-after', w: 720, h: 470, demo: true, cap: 'After', alt: 'Estrutura now: colored labels and thin lines in the margin, with the dictionary’s order in a strip.' },
+            ],
+          },
+          {
+            h: 'Silence is information too',
+            p: 'If a dictionary doesn’t have a word, its tab says “Não consta no OpenWordnet,” because knowing a source doesn’t have something matters to a researcher. Serif only shows up for the dictionary’s own words, so you always know what the dictionary said and what the interface said.',
+            media: { frame: '/assets/diciobase/demos/feature-embed.html?f=missing', w: 760, h: 300, demo: true, alt: 'The entry for sertão: opening the OpenWordnet tab shows “Não consta no OpenWordnet”.' },
           },
           {
             h: 'The sign-up page that made people leave',
-            p: 'At first, saving a word sent you to a separate sign-up page, and when we tested it, a lot of people dropped off right there. So I made sign-up a pop-up instead, and as soon as you’re done, your word is saved.',
+            p: 'Saving a word used to send you to a separate sign-up page, and in testing a lot of people dropped off right there. So I made sign-up a pop-up, and your word saves the moment you’re done. In the next round, people signed up without leaving the word they were on.',
             compare: true,
             media: [
-              { todo: 'Separate sign-up page', cap: 'Before' },
-              { todo: 'Sign-up pop-up', cap: 'After' },
+              { frame: '/assets/diciobase/demos/feature-embed.html?f=signup-before', w: 760, h: 600, demo: true, cap: 'Before', alt: 'Saving a word sends you to a separate sign-up page, and the word is gone.' },
+              { frame: '/assets/diciobase/demos/feature-embed.html?f=signup-after', w: 760, h: 600, demo: true, cap: 'After', alt: 'Saving a word opens a sign-up pop-up over the entry, and the word is saved when you finish.' },
             ],
           },
           {
-            h: 'Three things I cut to keep the search front and center',
-            bullets: [
-              { lead: 'The busy globe.', text: 'My first globe was covered in tiny Portuguese words and a location dot. But the whole point of the hero is to get you to search, so I turned it into a quiet backdrop behind the search bar.' },
-              { lead: 'The dark surfaces.', text: 'The login and profile menu were almost black, and it felt like a second theme. Now black is only for primary actions, so it always means “do this.”' },
-              { lead: 'Compare view.', text: 'It crowded the screen more than it helped, and Diciobase was already a big change from how linguists were used to working.' },
-            ],
-            compare: true,
-            media: [
-              { todo: 'Busy globe', cap: 'Before' },
-              { todo: 'Quiet globe', cap: 'After' },
-              { todo: 'Dark login', cap: 'Before' },
-              { todo: 'Light login', cap: 'After' },
-            ],
+            h: 'Typing it however you can',
+            p: 'Search ignores accents, so “sao” still finds “são” on any keyboard, and the tabs stay pinned so you never scroll back up to switch dictionaries.',
+            media: { frame: '/assets/diciobase/demos/feature-embed.html?f=search', w: 760, h: 460, demo: true, alt: 'Typing sao in the search bar, and the suggestions show são.' },
           },
           {
-            h: 'Making Helvetica friendlier',
-            p: 'I still wanted it to look academic, so I started from Helvetica, tightened the spacing, and rounded the corners. We were also hoping to reach people outside of linguistics, so I wanted it to feel a little more inviting.',
-            media: { todo: 'Helvetica, then tightened, then rounded. Wordmark and monogram side by side.' },
+            h: 'A globe that was just decoration',
+            p: 'My first home page had a globe covered in tiny Portuguese words, and it was the same kind of distraction I’d been removing everywhere else. Now three slow orbits of cards, one per dictionary, frame the search, and the headline word shows its syllables, like the dots in di·cio·ba·se. When you click into the search, everything slows down and fades back.',
+            compare: true,
+            media: [
+              { img: '/assets/diciobase/globe-home.jpg', w: 1440, h: 900, cap: 'Before', alt: 'The first home page: a black dotted globe behind the search bar, under the headline Todos os dicionários. Em um só lugar.' },
+              { frame: '/assets/diciobase/demos/feature-embed.html?f=orbit', w: 1440, h: 900, demo: true, cap: 'After', alt: 'The orbit home page: cards drift around the search, then slow and fade back when you click into it.' },
+            ],
           },
         ],
       },
@@ -248,12 +271,12 @@ export const STUDIES = {
         rows: [
           { quote: 'I looked up a word for a paper. It took me four minutes including reading the results. That used to take my whole morning.', cite: 'PhD researcher, UFBA, after testing', avatar: false },
           {
-            h: 'What happens at eight dictionaries?',
-            p: 'Every dictionary we add makes “one at a time” harder to stick to. If I start seeing people flip back and forth between the same two tabs, that’s when I’d bring compare back, starting small with two entries side by side, only when you ask for it.',
+            h: 'Watch the workflow, not just the habit',
+            p: 'Laying dictionaries side by side was how researchers worked on paper, so I assumed they’d want it on screen. Watching them showed me the questions they were actually trying to answer, and the design is built around those now.',
           },
           {
-            h: 'Experts and beginners need different amounts of help, not different products',
-            p: 'Diciobase was my first time designing for academia, and I learned so much from talking to such different people. A linguist never has to open the “i” explainers, but a student can learn what Etimologia means without ever leaving the page.',
+            h: 'What I’d test next',
+            p: 'Diciobase is still a work in progress, and testing so far has been early. Next, I want to see how researchers use Estrutura over longer sessions, and whether compare earns its way back once more dictionaries come in.',
           },
         ],
       },

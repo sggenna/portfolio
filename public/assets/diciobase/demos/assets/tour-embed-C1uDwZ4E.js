@@ -1,0 +1,1 @@
+import{B as e,R as t,V as n,z as r}from"./saudade-CsOQ_wHT.js";import{t as i}from"./HeroTour-BlASdXRd.js";var a=n(e(),1),o=n(r(),1),s=t();o.createRoot(document.getElementById(`root`)).render((0,s.jsx)(a.StrictMode,{children:(0,s.jsx)(i,{})}));

@@ -10,6 +10,39 @@ const restTime = (src) => Number(src?.match(/#t=([\d.]+)/)?.[1] ?? 0);
 // How long the resting frame takes to fade back over the video when it stops.
 const SETTLE_MS = 500;
 
+// A live page on the card, scaled as one piece to the tile. It can't be hovered itself, so `playing` tells it.
+function CardFrame({ frame, title, playing }) {
+  const box = useRef(null);
+  const iframe = useRef(null);
+  const [width, setWidth] = useState(0);
+  useEffect(() => {
+    const el = box.current;
+    if (!el) return undefined;
+    const ro = new ResizeObserver(([e]) => setWidth(e.contentRect.width));
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
+  useEffect(() => {
+    iframe.current?.contentWindow?.postMessage(playing ? 'play' : 'stop', window.location.origin);
+  }, [playing]);
+  return (
+    <div ref={box} style={{ position: 'absolute', inset: 0, overflow: 'hidden' }}>
+      {width > 0 && (
+        <iframe
+          ref={iframe}
+          className="card__frame"
+          src={frame.src}
+          title={title}
+          loading="lazy"
+          scrolling="no"
+          inert
+          style={{ width: frame.w, height: frame.h, transform: `scale(${width / frame.w})` }}
+        />
+      )}
+    </div>
+  );
+}
+
 function ProjectCard({ p, hovered, onEnter, onLeave, onOpen }) {
   const { motion, narrow, fine, mainRef } = useEnv();
   const video = useRef(null);
@@ -95,6 +128,8 @@ function ProjectCard({ p, hovered, onEnter, onLeave, onOpen }) {
             onSeeked={paintStill}
             aria-label={`${p.name} product video`}
           />
+        ) : p.frame ? (
+          <CardFrame frame={p.frame} title={`${p.name} product demo`} playing={hovered} />
         ) : !p.soon && (
           <span className="card__placeholder">Product video · 16:9</span>
         )}
