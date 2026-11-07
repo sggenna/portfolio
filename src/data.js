@@ -140,7 +140,8 @@ export const STUDIES = {
   },
   dicio: {
     lede: 'Portuguese dictionaries, one search.',
-    live: '', // link for the "Try it live" button; it shows once this is filled in
+    live: 'https://diciobase.vercel.app/',
+    liveLocked: true, // the demo is on request: the button shows a lock, and its cursor carries the note
     note: 'Live demo available on request. In the beta, saved words only last for your session, and there are no accounts yet.',
     meta: [
       { l: 'Role', v: 'Product designer and developer' },
@@ -327,7 +328,6 @@ export const STUDIES = {
             wide: true,
             media: [
               { video: '/assets/bloomin/design-system.mp4', cut: { vw: 1400, vh: 860, x: 36, y: 36, w: 1328, h: 788, radius: 21, full: true, blend: true, track: [[0, 36, 36, 1328, 788]] }, alt: 'The Bloomin design system: Geist type, logo, buttons, plum, cream and pink colors sliding across, and one bloom illustration per course level' },
-              { img: '/assets/bloomin/palettes.webp', w: 2400, h: 1216, alt: 'Three palettes side by side: yellow and red, yellow and blue, and burgundy with soft lilacs' },
             ],
           },
           {
