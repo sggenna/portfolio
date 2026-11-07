@@ -4,7 +4,7 @@
 // `frame` puts a live page on the card instead, at its design size; it's told 'play' and 'stop' as the card is hovered.
 export const PROJECTS = [
   { key: 'platform', slug: 'bloomin/platform', name: "Bloomin' platform", line: 'One place for an English school to grow.', meta: 'Product design · Frontend · 2025', outcome: '20 min → 90 sec student setup', tags: ['In testing'], video: '/assets/bloomin-platform/cover-teacher-hd.mp4#t=2', fit: '#781444', framed: true, poster: '' },
-  { key: 'dicio', slug: 'diciobase', name: 'Diciobase', line: "Brazil's dictionaries, one search.", meta: 'Product design · Frontend · 2026', outcome: '23→1 steps per lookup', tags: ['Shipping 2026'], frame: { src: '/assets/diciobase/demos/search-embed.html', w: 720, h: 405 }, color: '#141414' },
+  { key: 'dicio', slug: 'diciobase', name: 'Diciobase', line: "Brazil's dictionaries, one search.", meta: 'Product design · Frontend · 2026', outcome: '23→1 steps per lookup', tags: ['Shipping 2026'], frame: { src: '/assets/diciobase/demos/search-embed.html', w: 720, h: 405 }, poster: '/assets/diciobase/card-poster.jpg', color: '#141414' },
   { key: 'plate', slug: 'platepal', name: 'PlatePal', line: 'Meal picks that fit your goals at every Columbia dining hall.', meta: 'Product design · Frontend · 2025', outcome: '93% of testers rated it 5 out of 5', tags: ['0→1'], video: '/assets/platepal/cover-solid.mp4#t=8', color: '#2f6f4f', poster: '', zoom: 1.16 },
   { key: 'bloomin', slug: 'bloomin', name: "Bloomin'", line: 'An English school that grew out of an Instagram page.', meta: 'Branding · Web · 2025', outcome: '20% more enrolled students', tags: ['0→1', 'Branding', 'Shipped'], video: '/assets/bloomin/logo-bloom.mp4#t=2.8', poster: '' },
 ];
@@ -44,16 +44,16 @@ export const STUDIES = {
             h: 'Every meal was a guessing game',
             quote: 'Concrete numbers would be a lot better than this guessing game.',
             cite: 'Savannah, Columbia student',
-            p: 'We surveyed 12 students and followed two of them through a whole meal, from picking a hall to sitting down to eat. The two sites students used were Lion Dine, which is student-built but has no nutrition info, and the Columbia Dining website, which only shows the day’s menu. So students with specific goals were left guessing.',
+            p: 'We surveyed 12 students and followed 5 of them through a whole meal, from picking a hall to sitting down to eat. When they looked up what to eat, Lion Dine had no nutrition info, and the Columbia Dining website only showed the day’s menu. So students with specific goals were left guessing.',
           },
           {
             h: 'Most students had a goal and no way to hit it',
-            p: 'Our affinity map showed three types of diners, goal-driven, convenience-driven, and habit-based. Goal-driven students were the biggest group and the most affected by the missing nutrition info, so I designed for them first while keeping the app fast for everyone else.',
+            p: 'Our affinity map showed three types of diners: goal-driven, convenience-driven, and habit-based. Goal-driven students were the biggest group and the most affected by the missing nutrition info, so I designed for them first while keeping the app fast for everyone else.',
             media: { img: '/assets/platepal/motivation.png', w: 1152, h: 400, alt: 'Three types of diners: 58% goal-driven, 25% convenience, 17% habit' },
           },
           {
             h: 'Our first prototype was a text message',
-            p: 'We ran a smoke-and-mirrors test where we texted participants meal picks by hand three times a day, the way the app eventually would. Personalized messages did a lot better than generic ones, and long ones usually went unread. That became my rule for every screen. If a student would wonder why something is there, it goes.',
+            p: 'For our smoke-and-mirrors test, we texted participants meal picks by hand three times a day, the way the app eventually would. Personalized messages did a lot better than generic ones, and long ones usually went unread. That became my rule for every screen: if something was too long or more than a student needed in that moment, I cut it.',
             media: { img: '/assets/platepal/texts-long-short-hd.webp', w: 3028, h: 1256, alt: 'Two text messages: a long generic list of what every dining hall is serving, and a short personal one, “Grilled chicken bowl at Ferris, 42g protein, fits your goal.”' },
           },
         ],
@@ -66,44 +66,24 @@ export const STUDIES = {
             h: 'Open the app, and dinner’s already decided',
             quote: 'If I also had an app that told me, OK, like… where to go and what macros that would be ideal.',
             cite: 'Kaylie, Columbia student',
-            p: [
-              'Participants really liked being told what to eat, especially on busy weekdays. So the plate of the day sits at the top of the home screen, built from each student’s macros, preferences, and favorite meals.',
-              'I didn’t want it to feel like extra friction though, so I tried a few different ways of showing it.',
-            ],
+            p: 'Participants really liked being told what to eat, especially on busy weekdays. So the plate of the day sits at the top of the home screen, built from each student’s macros, preferences, and favorite meals. The hard part was deciding how much it should say.',
             wide: true,
             media: { img: '/assets/platepal/plate-explorations-hd.webp', w: 3200, h: 1265, caps: [
-                { l: 'Too much', d: 'Answered every question, but read like the long texts participants ignored.' },
-                { l: 'Too easy to miss', d: 'Easy to skim, but it hid the numbers.' },
-                { l: 'Too many choices', d: 'Brought back the decision students wanted to skip.' },
-                { l: 'Just enough', d: 'One meal, where and when it’s served, calories and protein, and one tap to add or dismiss.' },
+                { l: 'Too much', d: 'Every macro, a description, “why we picked this,” and the dining hall in tiny text. Way too much for someone who just wants to grab a meal and go.' },
+                { l: 'Too little', d: 'Just “Suggested” and the plate. No macros, and no dining hall, so you didn’t even know where to get it.' },
+                { l: 'Too many choices', d: 'A few options to compare sounds helpful, but more choices make you take longer to decide, and people end up giving up and just grabbing whatever.' },
+                { l: 'Just enough', d: 'One plate that fits your goals: the photo, the name, which dining hall and until when, two pills for calories and protein, and add or dismiss.' },
               ], alt: 'Four versions of the plate of the day: a full nutrition card, a slim Suggested banner, a row of three options, and the final card with one meal' },
           },
           {
             h: 'No mystery meals',
-            p: 'Students also wanted to see the numbers for themselves. So we split the work in two. Llama 3 builds each plate from the day’s menus and the student’s profile, and an estimation layer on USDA FoodData Central gives the macros for every dish. That way every suggestion shows its numbers.',
+            p: 'Students also wanted to see the numbers for themselves. Llama 3 builds each plate from the day’s menus and the student’s profile, and an estimation layer on USDA FoodData Central gives the macros for every dish, so every suggestion shows its numbers.',
             wide: true,
             media: { img: '/assets/platepal/macro-pipeline-hd.webp', w: 3200, h: 1126, alt: 'Student profile plus today’s menus go to Llama 3, which picks the plate; USDA FoodData Central supplies the macros; the result is a meal card with calories, protein, carbs and fat' },
           },
           {
-            h: 'Seven questions on one screen was six too many',
-            p: [
-              'Version one asked for everything on one screen, including name, photo, calorie target, macro split, restrictions, allergens, and dining halls. When I tested it, everyone said it felt like homework standing between them and dinner.',
-              'So I split it into three quick steps. Dining halls come first, since it’s the easiest choice and it tailors everything after it. Restrictions and allergens share a step. Then students pick a calorie goal and PlatePal does the macro math, so nobody has to figure out what 30/40/30 means for them.',
-            ],
-            media: { video: '/assets/platepal/onboarding-before-after.mp4', cut: { mask: '/assets/platepal/onboarding-mask.svg', vw: 1920, vh: 1080, x: 533, y: 106, w: 854, h: 868, width: '98%' }, caps: ['Before', 'After'], alt: 'Before and after: single-page onboarding next to the three new steps for dining halls, restrictions and allergens, and a calorie goal' },
-          },
-          {
-            h: 'Settings is just onboarding, again, on purpose',
-            p: 'My first Settings page put every goal and preference in one place, and there was so much on it that managing your account felt like a chore. Since Settings covers the same things as onboarding, I rebuilt it from the onboarding screens, so it’s shorter and already familiar. I also swapped the sliders for plus and minus steppers, because sliders make exact numbers hard to hit on a phone.',
-            beside: true,
-            media: [
-              { img: '/assets/platepal/settings-before-phone.webp', w: 1400, h: 2917, caps: ['Before'], alt: 'A long Settings page with sliders for calories and macros' },
-              { img: '/assets/platepal/settings-after-phone.webp', w: 1400, h: 2917, caps: ['After'], alt: 'A shorter Settings screen rebuilt from onboarding, with plus and minus steppers' },
-            ],
-          },
-          {
             h: 'Your camera is the new food scale',
-            p: 'Guessing what’s on a plate is tedious and usually wrong. With PlatePal, students take a photo, the app estimates the macros using USDA data, and the meal gets added to their daily totals.',
+            p: 'The same numbers work for what you actually ate. Take a photo, PlatePal estimates the macros using USDA data, and the meal gets added to your daily totals.',
             media: {
               video: '/assets/platepal/photo-logging.mp4',
               alt: 'Taking a photo, seeing the estimated macros, and adding the meal to the daily totals',
@@ -115,8 +95,22 @@ export const STUDIES = {
             },
           },
           {
+            h: 'Seven questions on one screen was six too many',
+            p: 'Version one asked for everything on one screen, and every tester said it felt like homework standing between them and dinner. So I split it into three quick steps: dining halls first since it’s the easiest choice, then restrictions and allergens, then a calorie goal, and PlatePal does the macro math, so nobody has to figure out what 30/40/30 means for them.',
+            media: { video: '/assets/platepal/onboarding-before-after.mp4', cut: { mask: '/assets/platepal/onboarding-mask.svg', vw: 1920, vh: 1080, x: 533, y: 106, w: 854, h: 868, width: '98%' }, caps: ['Before', 'After'], alt: 'Before and after: single-page onboarding next to the three new steps for dining halls, restrictions and allergens, and a calorie goal' },
+          },
+          {
+            h: 'Settings is just onboarding, again, on purpose',
+            p: 'My first Settings page had so much on it that managing your account felt like a chore. Since it covers the same things as onboarding, I rebuilt it from those screens, so it’s shorter and already familiar. I also swapped sliders for plus and minus steppers, because sliders make exact numbers hard to hit on a phone.',
+            beside: true,
+            media: [
+              { img: '/assets/platepal/settings-before-phone.webp', w: 1400, h: 2917, caps: ['Before'], alt: 'A long Settings page with sliders for calories and macros' },
+              { img: '/assets/platepal/settings-after-phone.webp', w: 1400, h: 2917, caps: ['After'], alt: 'A shorter Settings screen rebuilt from onboarding, with plus and minus steppers' },
+            ],
+          },
+          {
             h: 'Twelve dining hall photos made one endless scroll',
-            p: 'My first home screen gave every dining hall a big photo, so finding a specific one meant scrolling past all twelve. My next version added a compact toggle, but a picture of a dining hall doesn’t really help anyone decide what to eat. So the photos went, and the halls got their own tab with what’s open, until when, and what’s on tonight, plus search and favorites.',
+            p: 'Finding a specific hall meant scrolling past all twelve photos. A compact toggle helped, but a picture of a dining hall doesn’t help anyone decide what to eat. So the photos went, and halls got their own tab with what’s open, until when, and what’s on tonight, plus search and favorites.',
             wide: true,
             media: {
               caps: [
@@ -133,8 +127,8 @@ export const STUDIES = {
         label: 'Reflection',
         rows: [
           {
-            h: 'A few text messages shaped the whole app',
-            p: 'Honestly, the smoke-and-mirrors test ended up shaping more of PlatePal than any mockup did. Seeing which texts people actually read told me what to cut on the plate of the day, onboarding, and Settings.',
+            h: 'Knowing how much people want to see',
+            p: 'We could have made every screen as helpful as possible by adding everything we knew about a meal. But we’re college students with short lunch breaks and a lot going on, and nobody has time to think through everything that goes into a meal. Sometimes an app that just tells you what to eat is the best thing that happens in your day. Listening to students showed me what to cut, so nothing stands between them and their food.',
           },
           {
             h: 'Every number is still an estimate',
@@ -196,7 +190,8 @@ export const STUDIES = {
               'This was the clearest thing I heard across the interviews. Researchers look at different dictionaries because each one builds its entries differently, and those differences are exactly what they study. Merging everything into one format would have taken that away and made Diciobase useless to them.',
               'So the real question became: how do you put every dictionary in one place and keep what makes each one different?',
             ],
-            media: { todo: 'Affinity map' },
+            wide: true,
+            media: { live: 'affinity-map', alt: 'Affinity map: 140+ observations in four themes, time and access, provenance and trust, non-linear navigation and citation, each with its finding, a quote and two observations.' },
           },
         ],
       },
@@ -211,7 +206,7 @@ export const STUDIES = {
           {
             h: 'The compare view nobody used',
             p: 'Researchers used to lay their dictionaries open side by side, so my first instinct was a compare view that did the same thing on screen. When I watched people use it, they read one dictionary at a time and never opened compare. It was taking up space, so I dropped it.',
-            media: { todo: 'Compare view prototype' },
+            media: { frame: '/assets/diciobase/demos/feature-embed.html?f=compare', w: 760, h: 380, demo: true, alt: 'The compare view prototype: Wikcionário and Dicionário Aberto side by side for saudade.' },
           },
           {
             h: 'One feature was secretly three questions',
@@ -292,10 +287,10 @@ export const STUDIES = {
       { l: 'Tools', v: 'Figma, React, Claude Code' },
     ],
     hero: { video: '/assets/bloomin/site-scroll.mp4', poster: '/assets/bloomin/site-scroll-poster.webp', phoneVideo: '/assets/bloomin/site-scroll-phone.mp4', phonePoster: '/assets/bloomin/site-scroll-phone-poster.webp', ratio: '16 / 10', phoneRatio: '390 / 844', big: true, bare: true, alt: 'Scrolling through the Bloomin’ landing page, from the hero through courses, Jamile, how classes work, testimonials, the FAQ and contact' },
-    tldr: 'Jamile ran her English school entirely out of Instagram DMs. I designed her brand and built a mobile-first landing page that answers students’ questions before they ask, and now I’m designing the platform they’ll learn on.',
+    tldr: 'Jamile runs an online English school, and before Bloomin’ all she had was an Instagram page, with no name, logo, or website. I designed the brand and built a mobile-first landing page that answers the questions she used to answer one by one in her DMs. Now I’m designing the platform her students learn on.',
     stats: [
       { v: '20%', l: 'more enrolled students since launch' },
-      { v: '80%', l: 'fewer students asking the same questions' },
+      { v: '80%', l: 'fewer students asking the same questions, from a month of Jamile tracking her DMs after launch' },
     ],
     chapters: [
       {
@@ -304,22 +299,17 @@ export const STUDIES = {
         rows: [
           {
             h: 'A whole English school running out of one Instagram page',
-            p: [
-              'Jamile teaches everyone from kids to adults who need English for work or travel, in groups of about 10 and one-on-one. Almost all of her students found her on Instagram, and every conversation happened in her DMs or on WhatsApp. She was doing all her marketing herself, so the branding she tried never really stuck, and she spent hours answering the same questions.',
-              'Her goal was to reach more adults learning English for their careers, so whatever we built had to feel grown-up.',
-            ],
+            p: 'Almost all of Jamile’s students found her on Instagram, and every conversation happened in her DMs or on WhatsApp. She did all her own marketing, so the branding never stuck, and she spent hours answering the same questions.',
             media: { img: '/assets/bloomin/instagram-dms.webp', w: 2800, h: 2890, alt: 'Her old Instagram profile in yellow and red next to a list of blurred DMs asking the same questions' },
           },
           {
             h: 'The same six questions, over and over',
-            p: 'Jamile let me go through about 40 of her DM and WhatsApp conversations, and the same six questions kept coming up.',
-            after: 'These became the backbone of the landing page.',
+            p: 'I went through about 40 of her DM and WhatsApp conversations, and the same six questions kept coming up, from how to join to whether you can try a class first. They became the backbone of the landing page.',
             media: { img: '/assets/bloomin/six-questions.webp', w: 2400, h: 2402, alt: 'The six questions as message bubbles, surrounded by blurred repeats of the same questions' },
           },
           {
-            h: 'Every other school was shouting',
-            p: 'We also looked at other English schools, and most of them used loud, saturated colors that were exhausting to look at. That showed us where not to go.',
-            media: { img: '/assets/bloomin/competitors.webp', w: 3200, h: 2000, alt: 'Six blurred competitor sites in loud, saturated colors around the calm Bloomin hero' },
+            h: 'Designing for the students she wants more of',
+            p: 'Jamile teaches kids and teens too, but she prefers teaching adults who are growing in their careers. So that’s who we designed for.',
           },
         ],
       },
@@ -328,38 +318,33 @@ export const STUDIES = {
         label: 'Design',
         rows: [
           {
-            h: 'A name you can grow into',
-            p: 'Our first idea was Fluency On, as in online and on time. But it felt generic, and I couldn’t picture a visual identity that would make it stand out. Jamile’s whole goal is for her students to bloom into their English, to stop being shy and grow into their confidence. Bloomin’ felt right to both of us, and it gave me a lot to work with visually.',
+            h: 'Fluency is the destination. Bloomin’ is how you get there.',
+            p: 'Our first idea was Fluency On. But fluency is where students end up, and Jamile’s school is about the process of getting there: growing into your English and becoming more confident. We wanted a name that reflected her approach, and Bloomin’ did.',
           },
           {
-            h: 'Yellow says slow down, red says stop',
-            p: [
-              'Jamile loves yellow and red, so that’s where we started. But red and yellow fight each other on screen, and they signal caution and stop, not “grow.” I walked her through it from her students’ point of view. If you’re an adult deciding whether to trust a teacher with your career, you don’t want to feel overwhelmed the second the page loads.',
-              'So we went the other way, with one strong color, a deep burgundy pink, only for accents and actions, and soft lilacs for the calmer parts of the page. It still feels like spring, just more grown-up. Once Jamile saw the reasoning, it didn’t take much convincing.',
-            ],
-            media: { img: '/assets/bloomin/palettes.webp', w: 2400, h: 1216, caps: ['Yellow and red', 'Yellow and blue', 'Burgundy and lilac'], alt: 'Three palettes side by side: yellow and red, yellow and blue, and burgundy with soft lilacs' },
-          },
-          {
-            h: 'A bloom for every course level',
-            p: 'I used Geist for type, plum for actions, cream and pink for everything else, and a bloom illustration for each course level.',
+            h: 'Bright colors were for a younger crowd',
+            p: 'Jamile wanted bright, saturated colors, and honestly I started there too. But when we looked at English schools using saturated palettes, they were mostly targeting younger learners. For adults with careers, that would read more like a children’s book. So we went with one deep burgundy pink for actions and soft lilacs and cream for everything else. It’s still playful, since it’s an English school, not a law firm, but it feels grown-up. Geist keeps the type clean, and each course level gets its own bloom.',
             wide: true,
-            media: { video: '/assets/bloomin/design-system.mp4', cut: { vw: 1400, vh: 860, x: 36, y: 36, w: 1328, h: 788, radius: 21, full: true, blend: true, track: [[0, 36, 36, 1328, 788]] }, alt: 'The Bloomin design system: Geist type, logo, buttons, plum, cream and pink colors sliding across, and one bloom illustration per course level' },
+            media: [
+              { video: '/assets/bloomin/design-system.mp4', cut: { vw: 1400, vh: 860, x: 36, y: 36, w: 1328, h: 788, radius: 21, full: true, blend: true, track: [[0, 36, 36, 1328, 788]] }, alt: 'The Bloomin design system: Geist type, logo, buttons, plum, cream and pink colors sliding across, and one bloom illustration per course level' },
+              { img: '/assets/bloomin/palettes.webp', w: 2400, h: 1216, alt: 'Three palettes side by side: yellow and red, yellow and blue, and burgundy with soft lilacs' },
+            ],
           },
           {
             h: 'A website that answers the DMs for her',
-            p: 'Jamile wrote short answers to each of the six questions, and I ordered the page to answer them in the order people ask them. It goes from how to start, to the courses, who she is, and how classes work, then testimonials and an FAQ. From anywhere on the page, you’re one tap away from messaging her on WhatsApp.',
+            p: 'Jamile wrote short answers to each of the six questions, and I ordered the page to answer them in the order people ask them. From anywhere on the page, you’re one tap from messaging her on WhatsApp. And when someone comes back to the site after messaging her, petals fall, a small reward for the one step the whole page is designed around.',
             wide: true,
             media: { img: '/assets/bloomin/questions-map.webp', w: 2929, h: 1997, alt: 'The six questions on the left, connected by lines to the page sections that answer them on the right' },
           },
           {
             h: 'One headline, one button',
-            p: 'I wanted the hero to be fun but still feel serious. My first idea was a flower drawing itself as you scroll, but it felt too plain. My second was flowers popping out when you hover over the letters, but that pulled attention away from the one thing the hero needs you to do, which is book a trial class. I landed on Bloomin’ in big letters with flowers that sway a little when you hover, like a breeze is passing, right next to the course and the trial class button.',
+            p: 'After sketching ideas and setting up the design system in Figma, I used Claude Code to turn them into hero prototypes Jamile could click through, so we could compare real versions without spending weeks on each one. A flower drawing itself felt too plain. Flowers popping out on hover pulled attention from booking a trial class. Flowers that sway a little on hover, like a breeze, kept it fun without competing with the button.',
             wide: true,
             media: { frame: '/assets/bloomin/hero-ideas.html', w: 1800, h: 1590, cap: 'Live prototypes I built so Jamile could compare', alt: 'Three live hero prototypes: a flower that draws itself on scroll, flowers that pop out when you hover the letters, and the final hero, where flowers sway on hover' },
           },
           {
-            h: 'Nobody reads 30 testimonials',
-            p: 'Jamile had about 30 great testimonials, but nobody reads 30 reviews before signing up for a course. In V1, I cut them to 15 and kept them full length. For V2, since people mostly want to know whether they can trust the teacher, I pulled the strongest line from each one to the top so they’re easy to skim, and kept the best 6.',
+            h: 'When are testimonials too much?',
+            p: 'Jamile had over 30 testimonials, including videos, and our first version included all of them. Nobody was going to scroll through that. People come to a landing page to find out what you’re about, what you can do for them, and what to do next, and credibility helps, but it isn’t the point. Research I found suggested people rarely read past six testimonials, which also helped Jamile feel OK leaving the rest out. So we kept six, and for the long ones I pulled the most important line up as a big quote, so you get the same trust without reading the whole thing.',
             compare: true,
             media: [
               { img: '/assets/bloomin/testimonial-full.webp', w: 2640, h: 1656, cap: 'Before', alt: 'A testimonial shown at full length as one long paragraph' },
@@ -369,33 +354,16 @@ export const STUDIES = {
         ],
       },
       {
-        id: 'cs-build',
-        label: 'How I built it',
-        rows: [
-          {
-            h: 'Prototypes she could click, petals you have to earn',
-            p: [
-              'I built the site in React, mobile first. I used Claude Code to spin up working versions of ideas like the hero options, so Jamile could click through real versions instead of picturing them from static mockups. It made our feedback sessions a lot faster and more concrete.',
-              'For the petals, tapping the WhatsApp button saves a small flag in the browser. When someone comes back to the site, like after sending Jamile a message, the petals fall. It’s a little reward for taking the one step the whole page is designed around.',
-            ],
-          },
-        ],
-      },
-      {
         id: 'cs-reflection',
         label: 'Reflection',
         rows: [
           {
-            h: 'I’d explore the brand longer up front',
-            p: 'We kept backtracking, deciding on something and then realizing weeks later it didn’t work. More exploration early on would have saved us those loops.',
-          },
-          {
             h: 'Clients need a designer with a point of view',
-            p: 'Clients without branding experience often come in with specific ideas, like Jamile’s yellow and red, that aren’t what’s best for their brand. I learned my job isn’t just executing those ideas, it’s explaining my reasoning clearly enough that they trust it.',
+            p: 'Jamile’s colors and her 30 testimonials both came from good instincts. My job wasn’t to just execute them or overrule her. It was to bring reasoning and evidence she could trust.',
           },
           {
-            h: 'A landing page gave me room to be expressive',
-            p: 'This was my first time doing branding at a professional level. Most of my projects are platforms, where everything has to be as efficient as possible, so a landing page gave me more room to play.',
+            h: 'I’d explore the brand longer up front',
+            p: 'We kept deciding on something and realizing weeks later it didn’t work. More exploration early on would have saved us those loops.',
           },
         ],
       },
@@ -410,7 +378,7 @@ export const STUDIES = {
       { l: 'Tools', v: 'Figma, React, Express' },
     ],
     hero: { video: '/assets/bloomin-platform/hero-student.mp4', ratio: '16 / 10', alt: 'A student starts a lesson from Início: a wrong answer brings Bloom’s hint, the right answer earns XP, and Lição concluída shows the results' },
-    tldr: 'Bloomin’ is the learning platform for Professora Jamile’s online English school. Students take lessons, practice, turn in homework, and see how they’re doing, and Jamile runs her classes and keeps track of everyone in the same place.',
+    tldr: 'Bloomin’ is the learning platform for Professora Jamile’s online English school. Students take lessons, practice, and turn in homework, and Jamile runs her classes and keeps track of everyone in the same place.',
     stats: [
       { v: '90 sec', l: 'to set up a new student, down from 20 min' },
       { v: '5 → 1', l: 'apps to run the school' },
@@ -425,7 +393,7 @@ export const STUDIES = {
             quote: 'Sometimes I finish a lesson and I’m not sure if I’m done or if I missed something.',
             cite: 'Beginner student, working full-time',
             avatar: false,
-            p: 'Classes were on Meet, homework was on WhatsApp or Forms, and recordings were on YouTube or Drive, so finding the right material for homework took forever. Jamile was also tracking everything by hand, and since she wants to grow the school, that wasn’t going to work for much longer.',
+            p: 'Classes were on Meet, homework on WhatsApp or Forms, and recordings on YouTube or Drive. Jamile tracked everything by hand, which wasn’t going to work as the school grew.',
             media: { img: '/assets/bloomin-platform/five-apps.webp', w: 2800, h: 1670, alt: 'Meet, WhatsApp, Drive, YouTube, and Forms all pointing at Ana, a B1 student with five apps to open before class' },
           },
           {
@@ -433,9 +401,11 @@ export const STUDIES = {
             quote: 'I just want to open it and see what I should do today.',
             cite: 'Maria Eduarda, preparing to move abroad',
             avatar: false,
-            p: 'I had Jamile and three students at different levels walk me through a normal session. Jamile needed to see who needed her attention, share materials, take attendance, and correct homework. Students mostly wanted to know what to do today and whether they were actually getting better. So that became my rule for every page. Whatever helps you figure out what to do next goes up front, and everything else is one click away.',
-            wide: true,
-            media: { live: 'mistake-journey', alt: 'One “She work” mistake traveling from Corrections to Practice to Progress to Bruno’s profile to Today' },
+            p: 'I had Jamile and three students walk me through a normal session, and it gave me one rule for every page: whatever helps you figure out what to do next goes up front, and everything else is one click away.',
+          },
+          {
+            h: 'A correction went nowhere',
+            p: 'Jamile would mark a mistake, and that was the end of it. With so many students, she couldn’t remember everyone’s mistakes and make practice for each one, so corrections just got lost. How could a correction become something the student does, and something Jamile can see?',
           },
         ],
       },
@@ -445,13 +415,26 @@ export const STUDIES = {
         rows: [
           {
             h: 'A red mark becomes a lesson',
-            p: 'When Jamile tags “She work” as a grammar mistake, it turns into a drill on that student’s practice page, signed “Da Prof. Jamile.” When the student practices it, their progress moves, and Jamile can see that change on her side too.',
+            p: 'When Jamile tags “She work” as a grammar mistake, it becomes a drill on that student’s practice page, signed “Da Prof. Jamile.” When they practice it, their progress moves, and Jamile sees it too. The platform remembers the mistakes so she doesn’t have to.',
+            after: 'The catch: if corrections pile up, students think they’re done when more is on the way.',
             wide: true,
             media: { frame: '/assets/tag-to-drill/Bloomin%20Tag%20to%20Drill.dc.html', w: 1920, h: 1080, demo: true, phoneFrame: { src: '/assets/tag-to-drill/Bloomin%20Tag%20to%20Drill%20Phone.dc.html', w: 430, h: 770 }, stillVideo: '/assets/bloomin-platform/tag-to-drill.mp4', alt: 'Tagging “She work” as grammar, then the same mistake showing up as a drill on the student’s practice page' },
           },
           {
+            h: 'Seat counts don’t help you teach tonight',
+            p: [
+              'Jamile wants to grow the school and bring on more teachers, so I built her first dashboard around the business, with students, occupancy, and open seats. She told me that might matter for growing the school, but day to day she just needed to know what to do with her students that day.',
+              'I’d designed for the owner she wants to be, not the teacher she is every day. So the analytics moved one click away, and Hoje starts with her next class and her pending corrections, then who’s drifting.',
+            ],
+            compare: true,
+            media: [
+              { img: '/assets/bloomin-platform/hoje-before.webp', w: 2400, h: 2400, cap: 'Before, Painel built around seats and occupancy', alt: 'Painel: student, class, open-seat and occupancy counts, classes with seat-capacity dots, recent activity, shortcuts and the week’s agenda, with pending corrections in a footnote' },
+              { img: '/assets/bloomin-platform/hoje-after.webp', w: 2400, h: 2400, cap: 'After, Hoje built around the next class', alt: 'Hoje: the next class and pending corrections, weekly attendance and on-time rates, what to handle before class, then students who need attention' },
+            ],
+          },
+          {
             h: 'When every column speaks at the same volume, nothing is urgent',
-            p: 'Tarefas (homework) really only has one job, which is showing what’s late, what’s due this week, and what can wait. A student should know what to do tonight, and Jamile should be able to look at the same list and see who’s falling behind. It took me four layouts to get there, and each one got the hierarchy wrong in a different way.',
+            p: 'On the student side, Tarefas has one job: showing what’s late, what’s due this week, and what can wait. It took four layouts to get the hierarchy right.',
             compare: true,
             media: [
               { img: '/assets/bloomin-platform/tarefas-uppercase.webp', w: 2240, h: 1120, caps: [{ l: 'Uppercase labels', d: 'The uppercase group labels were louder than the homework under them, and every row repeated “B1” even though students already know their level.' }], alt: 'Tarefas as cards under uppercase group labels' },
@@ -461,26 +444,13 @@ export const STUDIES = {
             ],
           },
           {
-            h: 'Seat counts don’t help you teach tonight',
-            p: [
-              'Jamile’s first dashboard was all business numbers, like students, occupancy, and open seats. When I talked to her, she said they didn’t help her day to day. She just wanted to see what was next. So we moved the analytics to Alunos, which costs her one extra click, but she doesn’t need them to get through the day.',
-              'Hoje starts with her next class and, right next to it, her corrections. Because of tag-to-drill, every correction becomes practice for a student, so if they pile up, students think they’re done when more is on the way. Getting them back before class means students bring their questions to that class instead of waiting a week.',
-              'Below that is what to handle before class, like reminding three students about the Essay, and then who’s drifting, like Ana Maria at 75% attendance.',
-            ],
-            compare: true,
-            media: [
-              { img: '/assets/bloomin-platform/hoje-before.webp', w: 2400, h: 2400, cap: 'Before, Painel built around seats and occupancy', alt: 'Painel: student, class, open-seat and occupancy counts, classes with seat-capacity dots, recent activity, shortcuts and the week’s agenda, with pending corrections in a footnote' },
-              { img: '/assets/bloomin-platform/hoje-after.webp', w: 2400, h: 2400, cap: 'After, Hoje built around the next class', alt: 'Hoje: the next class and pending corrections, weekly attendance and on-time rates, what to handle before class, then students who need attention' },
-            ],
-          },
-          {
             h: 'The mascot that barely shows up',
-            p: 'Jamile’s biggest worry was keeping students practicing, and a mascot can build the kind of warmth Duo does for Duolingo. My first instinct was to put Bloom everywhere, but an animated character on every page gets noisy, and honestly a little childish for adults learning English for work. So she only shows up at key moments, like your home page, your progress, finishing a game, and clearing your notifications. She can droop for a second when you miss an answer, but never because of your level.',
+            p: 'Bloom on every page felt noisy, and a little childish for adults learning English for work. So she only shows up at key moments, like your progress, finishing a game, and being all caught up. She can droop for a second when you miss an answer, but never because of your level.',
             media: { img: '/assets/bloomin-platform/bloom-growing.webp', w: 492, h: 600, small: true, alt: 'Bloom growing from a seed to full bloom, A1 to C2' },
           },
           {
             h: 'Twenty minutes of setup, down to ninety seconds',
-            p: 'Setting up a new student used to take 20 minutes across all of Jamile’s apps. Now you open her invite, pick a daily goal, and you’re already in your first lesson. With the 10 students testing it so far, setup takes about 90 seconds.',
+            p: 'Students open Jamile’s invite, pick a daily goal, and they’re in their first lesson. Across 10 timed test sessions, setup took about 90 seconds.',
             media: { video: '/assets/bloomin-platform/onboarding.mp4', alt: 'Opening Jamile’s invite, setting a daily goal, and landing in the first lesson' },
           },
         ],
@@ -491,15 +461,15 @@ export const STUDIES = {
         rows: [
           {
             h: 'Emphasis only works when it’s rare',
-            p: 'The less Bloom shows up, the more each appearance means, and I realized the same thing was true for color, motion, and filled buttons.',
+            p: 'The less Bloom shows up, the more each appearance means, and the same goes for color, motion, and filled buttons.',
           },
           {
             h: 'Sometimes the problem is the layout, not the details',
-            p: 'Grading went through a bunch of rounds of small fixes before I realized the layout itself was the problem. Now when something still feels off after a couple of tries, I stop tweaking and ask whether the structure actually fits what the page is for.',
+            p: 'Tarefas went through rounds of small fixes before I realized the layout itself was wrong. Now when something still feels off after a couple of tries, I question the structure instead of tweaking.',
           },
           {
-            h: 'Adding contracts and exams without making it heavy',
-            p: 'Bloomin’ is still a work in progress. Next, we’re adding a way for students to sign their contracts in the platform and find them in their profile, and eventually exams too. The hard part will be fitting all of that in without making the platform feel heavy, especially for students who just want to open it and see what to do today.',
+            h: 'Next: contracts and exams, without the weight',
+            p: 'We’re adding contract signing and, later, exams. The hard part will be fitting them in for students who just want to open it and see what to do today.',
           },
         ],
       },

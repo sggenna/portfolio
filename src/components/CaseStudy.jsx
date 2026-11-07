@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import Toc from './Toc.jsx';
 import KeyedClip from './KeyedClip.jsx';
 import MistakeJourney from './MistakeJourney.jsx';
+import AffinityMap from './AffinityMap.jsx';
 import { PROCESS, RESULTS, STUDIES, casePath } from '../data.js';
 import { useEnv, useMediaQuery } from '../hooks/useEnv.js';
 
@@ -127,6 +128,7 @@ function Media({ m }) {
       {m.frame && (motion || !m.stillVideo) && <LiveFrame src={m.frame} w={m.w} h={m.h} title={m.alt} phone={m.phoneFrame} demo={m.demo} />}
       {m.frame && !motion && m.stillVideo && <KeyedClip src={m.stillVideo} label={m.alt} />}
       {m.live === 'mistake-journey' && <MistakeJourney label={m.alt} />}
+      {m.live === 'affinity-map' && <AffinityMap label={m.alt} />}
       {m.frame || m.live ? null : m.video
         ? <Clip src={m.video} label={m.alt} style={m.cut ? cutStyle(m.cut) : undefined} tracked={m.cut?.track ? m.cut : undefined} />
         : <img src={m.img} alt={m.alt} width={m.w} height={m.h} loading="lazy" draggable={false} />}
@@ -463,6 +465,8 @@ export default function CaseStudy({ project, upNext, phase, full, onToggleFull, 
                           aria-hidden="true"
                           style={{ transform: u.zoom ? `scale(${u.zoom})` : undefined, objectFit: u.fit ? 'contain' : undefined }}
                         />
+                      ) : u.poster ? (
+                        <img src={u.poster} alt="" aria-hidden="true" draggable={false} />
                       ) : 'Product video · 16:9'}
                     </div>
                     <div className="cs__next-text">
