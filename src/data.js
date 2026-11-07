@@ -498,7 +498,7 @@ export const EXPERIENCE = [
 
 // `slug` is the photo's link (/about/<slug>), `short` shows under it on phones, `cap` when it's open or hovered.
 export const THINGS = [
-  { id: 'about-radio', slug: 'radio', short: 'On WKCR', cap: 'On WKCR, aka making people listen to my playlists', ph: 'Photo: doing radio' },
+  { id: 'about-radio', slug: 'radio', short: 'On student radio', cap: 'On student radio, aka making people listen to my playlists', ph: 'Photo: doing radio' },
   { id: 'about-cats', slug: 'cats', short: 'Making cat friends', cap: 'Every cat I meet is a friend I haven’t made yet', ph: 'Photo: with a cat' },
   { id: 'about-drawing', slug: 'drawing', short: 'Drawing with graphite', cap: 'Drawing with graphite', ph: 'Photo: drawing' },
   { id: 'about-sophia', slug: 'sophia', short: 'Cat auntie to Sophia', cap: 'Proud cat auntie to Sophia', ph: 'Photo: Sophia' },
