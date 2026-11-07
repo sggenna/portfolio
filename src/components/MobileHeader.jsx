@@ -1,4 +1,4 @@
-import { NAV } from '../data.js';
+import { NAV, NAV_PATHS } from '../data.js';
 import { PulseDot } from './Sidebar.jsx';
 
 export default function MobileHeader({ active, onNav }) {
@@ -16,10 +16,10 @@ export default function MobileHeader({ active, onNav }) {
         {NAV.map((label, i) => (
           <a
             key={label}
-            href="#"
+            href={NAV_PATHS[i]}
             aria-current={i === active ? 'page' : 'false'}
             style={{ color: i === active ? '#b21f86' : '#1f1a1d' }}
-            onClick={(e) => { e.preventDefault(); onNav(i); }}
+            onClick={(e) => onNav(i, e)}
           >
             <img src="/assets/v7/sparkle.png" alt="" style={{ opacity: i === active ? 1 : 0 }} />
             <span>{label}</span>

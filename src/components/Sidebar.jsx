@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
-import { NAV } from '../data.js';
+import { NAV, NAV_PATHS } from '../data.js';
 import { useEnv } from '../hooks/useEnv.js';
 
 export function PulseDot() {
@@ -123,8 +123,6 @@ export default function Sidebar({ active, onNav, lookRight }) {
     return () => window.removeEventListener('resize', measure);
   }, [measure]);
 
-  const click = (i) => (e) => { e.preventDefault(); onNav(i); };
-
   return (
     <aside className="sidebar">
       <Portrait lookRight={lookRight} />
@@ -159,11 +157,11 @@ export default function Sidebar({ active, onNav, lookRight }) {
           <a
             key={label}
             ref={(el) => { links.current[i] = el; }}
-            href="#"
+            href={NAV_PATHS[i]}
             className="sidebar__link"
             style={{ color: i === lit ? '#b21f86' : '#1f1a1d' }}
             aria-current={i === active ? 'page' : 'false'}
-            onClick={click(i)}
+            onClick={(e) => onNav(i, e)}
             onMouseEnter={() => setNavHover(i)}
             onMouseLeave={() => setNavHover(null)}
             onFocus={() => setNavHover(i)}
