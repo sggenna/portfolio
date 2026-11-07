@@ -162,7 +162,6 @@ export const STUDIES = {
     stats: [
       { v: '4 min', l: 'per lookup in early testing, down from a whole morning' },
       { v: '23 → 1', l: 'steps to one search' },
-      { v: '680 → 410 ms', l: 'per search' },
     ],
     chapters: [
       {
