@@ -6,12 +6,12 @@ export function PulseDot() {
   return <span className="pulse" aria-hidden="true" />;
 }
 
-export function ContactLinks({ onResume, className = '' }) {
+export function ContactLinks({ className = '' }) {
   return (
     <>
       <a className={className} href="mailto:gsg2141@columbia.edu">Email ↗</a>
       <a className={className} href="https://www.linkedin.com/in/genna-gonzaga/" target="_blank" rel="noreferrer">LinkedIn ↗</a>
-      <a className={className} href="#" onClick={onResume}>Resume ↗</a>
+      <a className={className} href="/genna-gonzaga-resume.pdf" target="_blank" rel="noreferrer">Resume ↗</a>
     </>
   );
 }
@@ -174,7 +174,7 @@ export default function Sidebar({ active, onNav, lookRight }) {
 
       <div className="sidebar__contact">
         <p className="eyebrow">Contact</p>
-        <ContactLinks onResume={(e) => e.preventDefault()} />
+        <ContactLinks />
       </div>
     </aside>
   );

@@ -256,7 +256,7 @@ export default function Footer() {
         <div className="footer__contact">
           <p className="eyebrow">Contact</p>
           <div>
-            <ContactLinks onResume={(e) => e.preventDefault()} />
+            <ContactLinks />
           </div>
         </div>
       )}
