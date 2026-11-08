@@ -3,10 +3,10 @@
 // A `#t=<seconds>` on `video` picks the frame the card rests on before it plays.
 // `frame` puts a live page on the card instead, at its design size; it's told 'play' and 'stop' as the card is hovered.
 export const PROJECTS = [
-  { key: 'platform', slug: 'bloomin/platform', name: "Bloomin' platform", line: 'One place for an English school to grow.', meta: 'Product design · Frontend · 2025', outcome: '20 min → 90 sec student setup', tags: ['In testing'], video: '/assets/bloomin-platform/cover-teacher-hd.mp4#t=2', fit: '#781444', framed: true, poster: '' },
-  { key: 'dicio', slug: 'diciobase', name: 'Diciobase', line: "Brazil's dictionaries, one search.", meta: 'Product design · Frontend · 2026', outcome: '23→1 steps per lookup', tags: ['Shipping 2026'], frame: { src: '/assets/diciobase/demos/search-embed.html', w: 720, h: 405 }, poster: '/assets/diciobase/card-poster.jpg', color: '#141414' },
-  { key: 'plate', slug: 'platepal', name: 'PlatePal', line: 'Meal picks that fit your goals at every Columbia dining hall.', meta: 'Product design · Frontend · 2025', outcome: '93% of testers rated it 5 out of 5', tags: ['0→1'], video: '/assets/platepal/cover-solid.mp4#t=8', color: '#2f6f4f', poster: '', zoom: 1.16 },
-  { key: 'bloomin', slug: 'bloomin', name: "Bloomin'", line: 'An English school that grew out of an Instagram page.', meta: 'Branding · Web · 2025', outcome: '20% more enrolled students', tags: ['0→1', 'Branding', 'Shipped'], video: '/assets/bloomin/logo-bloom.mp4#t=2.8', poster: '' },
+  { key: 'platform', slug: 'bloomin/platform', name: "Bloomin' platform", line: 'One place for an English school to grow.', meta: 'Product design · Full stack · 2025–now', outcome: '20 min → 90 sec student setup', tags: ['In testing'], video: '/assets/bloomin-platform/cover-teacher-hd.mp4#t=2', fit: '#781444', framed: true, poster: '' },
+  { key: 'dicio', slug: 'diciobase', name: 'Diciobase', line: "Brazil's dictionaries, one search.", meta: 'Product design · Full stack · 2025–2026', outcome: '23→1 steps per lookup', tags: ['Beta', 'Demo on request'], frame: { src: '/assets/diciobase/demos/search-embed.html', w: 720, h: 405 }, poster: '/assets/diciobase/card-poster.jpg', color: '#141414' },
+  { key: 'plate', slug: 'platepal', name: 'PlatePal', line: 'Meal picks that fit your goals at every Columbia dining hall.', meta: 'Product design · Full stack · 2025', outcome: '93% of testers rated it 5 out of 5', tags: ['0→1'], video: '/assets/platepal/cover-solid.mp4#t=8', color: '#2f6f4f', poster: '', zoom: 1.16 },
+  { key: 'bloomin', slug: 'bloomin', name: "Bloomin'", line: 'An English school that grew out of an Instagram page.', meta: 'Branding · Web · 2025–2026', outcome: '20% more enrolled students', tags: ['0→1', 'Branding', 'Shipped'], video: '/assets/bloomin/logo-bloom.mp4#t=2.8', poster: '' },
 ];
 
 // Written case studies, keyed by project. Projects without one show the template case study.
@@ -140,9 +140,9 @@ export const STUDIES = {
   },
   dicio: {
     lede: 'Portuguese dictionaries, one search.',
-    live: 'https://diciobase.vercel.app/',
-    liveLocked: true, // the demo is on request: the button shows a lock, and its cursor carries the note
-    note: 'Live demo available on request. In the beta, saved words only last for your session, and there are no accounts yet.',
+    live: '', // link for the "Try it live" button; it shows once this is filled in
+    demo: 'Demo on request', // shown instead of a link while the demo isn't public
+    note: 'In the beta, saved words only last for your session, and there are no accounts yet.',
     meta: [
       { l: 'Role', v: 'Product designer and developer' },
       { l: 'Team', v: 'FORMAS Research Lab' },
@@ -266,7 +266,7 @@ export const STUDIES = {
         rows: [
           { quote: 'I looked up a word for a paper. It took me four minutes including reading the results. That used to take my whole morning.', cite: 'PhD researcher, UFBA, after testing', avatar: false },
           {
-            h: 'Watch the workflow, not just the habit',
+            h: 'Watch the workflow behind the habit',
             p: 'Laying dictionaries side by side was how researchers worked on paper, so I assumed they’d want it on screen. Watching them showed me the questions they were actually trying to answer, and the design is built around those now.',
           },
           {
@@ -323,7 +323,7 @@ export const STUDIES = {
           },
           {
             h: 'Bright colors were for a younger crowd',
-            p: 'Jamile wanted bright, saturated colors, and honestly I started there too. But when we looked at English schools using saturated palettes, they were mostly targeting younger learners. For adults with careers, that would read more like a children’s book. So we went with one deep burgundy pink for actions and soft lilacs and cream for everything else. It’s still playful, since it’s an English school, not a law firm, but it feels grown-up. Geist keeps the type clean, and each course level gets its own bloom.',
+            p: 'Jamile wanted bright, saturated colors, and honestly I started there too. But when we looked at English schools using saturated palettes, they were mostly targeting younger learners. For adults with careers, that would read more like a children’s book. So we went with one deep burgundy pink for actions and soft lilacs and cream for everything else. It’s still playful, since it’s an English school, and it feels grown-up. Geist keeps the type clean, and each course level gets its own bloom.',
             wide: true,
             media: [
               { video: '/assets/bloomin/design-system.mp4', cut: { vw: 1400, vh: 860, x: 36, y: 36, w: 1328, h: 788, radius: 21, full: true, blend: true, track: [[0, 36, 36, 1328, 788]] }, alt: 'The Bloomin design system: Geist type, logo, buttons, plum, cream and pink colors sliding across, and one bloom illustration per course level' },
@@ -343,7 +343,7 @@ export const STUDIES = {
           },
           {
             h: 'When are testimonials too much?',
-            p: 'Jamile had over 30 testimonials, including videos, and our first version included all of them. Nobody was going to scroll through that. People come to a landing page to find out what you’re about, what you can do for them, and what to do next, and credibility helps, but it isn’t the point. Research I found suggested people rarely read past six testimonials, which also helped Jamile feel OK leaving the rest out. So we kept six, and for the long ones I pulled the most important line up as a big quote, so you get the same trust without reading the whole thing.',
+            p: 'Jamile had over 30 testimonials, including videos, and our first version included all of them. Nobody was going to scroll through that. People come to a landing page to find out what you’re about, what you can do for them, and what to do next, and the testimonials only need to back that up. Research I found suggested people rarely read past six testimonials, which also helped Jamile feel OK leaving the rest out. So we kept six, and for the long ones I pulled the most important line up as a big quote, so you get the same trust without reading the whole thing.',
             compare: true,
             media: [
               { img: '/assets/bloomin/testimonial-full.webp', w: 2640, h: 1656, cap: 'Before', alt: 'A testimonial shown at full length as one long paragraph' },
@@ -358,7 +358,7 @@ export const STUDIES = {
         rows: [
           {
             h: 'Clients need a designer with a point of view',
-            p: 'Jamile’s colors and her 30 testimonials both came from good instincts. My job wasn’t to just execute them or overrule her. It was to bring reasoning and evidence she could trust.',
+            p: 'Jamile’s colors and her 30 testimonials both came from good instincts. My job was to bring reasoning and evidence she could trust.',
           },
           {
             h: 'I’d explore the brand longer up front',
@@ -423,7 +423,7 @@ export const STUDIES = {
             h: 'Seat counts don’t help you teach tonight',
             p: [
               'Jamile wants to grow the school and bring on more teachers, so I built her first dashboard around the business, with students, occupancy, and open seats. She told me that might matter for growing the school, but day to day she just needed to know what to do with her students that day.',
-              'I’d designed for the owner she wants to be, not the teacher she is every day. So the analytics moved one click away, and Hoje starts with her next class and her pending corrections, then who’s drifting.',
+              'I’d designed for the owner she wants to become, and what she needed day to day was help teaching. So the analytics moved one click away, and Hoje starts with her next class and her pending corrections, then who’s drifting.',
             ],
             compare: true,
             media: [
@@ -463,7 +463,7 @@ export const STUDIES = {
             p: 'The less Bloom shows up, the more each appearance means, and the same goes for color, motion, and filled buttons.',
           },
           {
-            h: 'Sometimes the problem is the layout, not the details',
+            h: 'Sometimes the problem is the whole layout',
             p: 'Tarefas went through rounds of small fixes before I realized the layout itself was wrong. Now when something still feels off after a couple of tries, I question the structure instead of tweaking.',
           },
           {

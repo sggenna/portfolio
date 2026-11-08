@@ -105,6 +105,16 @@ button { font: inherit; }
   background: var(--plum); color: #fff; font-size: 12px; line-height: 16px; font-weight: 500; white-space: nowrap;
   transition: opacity 200ms ease-out, transform 280ms ease-out;
 }
+/* "hover me" / "click me": a quiet gray word under her until someone plays */
+.portrait__hint {
+  position: absolute; top: 100%; left: 50%; transform: translate(-50%, 2px);
+  color: var(--muted); font-size: 11px; line-height: 14px; white-space: nowrap; pointer-events: none;
+  transition: opacity 240ms ease-out;
+}
+.portrait--touch { cursor: pointer; -webkit-tap-highlight-color: transparent; }
+/* Centered on a phone, so a long line grows out to her right instead of over her face */
+.portrait--touch .portrait__oi { right: auto; left: 74%; }
+.portrait--touch:focus-visible { outline: 2px solid var(--magenta); outline-offset: 4px; border-radius: 12px; }
 .sidebar__name {
   white-space: nowrap; font-weight: 700; font-size: clamp(32px, 3vw, 44px); line-height: 1;
   letter-spacing: -.03em; color: #4a1538;
@@ -132,7 +142,7 @@ button { font: inherit; }
 
 /* ---------- mobile header ---------- */
 .mheader { display: flex; flex-direction: column; align-items: center; padding: var(--s-24) var(--s-16) 0; text-align: center; }
-.mheader__avatar { width: 96px; display: block; }
+.mheader__avatar { width: 96px; margin: 0; }
 .mheader__name { margin-top: 16px; white-space: nowrap; font-weight: 700; font-size: 36px; line-height: 1; letter-spacing: -.03em; color: #4a1538; }
 .mheader__school { margin-top: 8px; color: var(--muted); font-size: 14px; line-height: 20px; font-weight: 500; }
 .mheader__bio { max-width: 440px; margin: 16px auto 0; text-wrap: pretty; }
@@ -489,8 +499,6 @@ html:has(.viewer[open]) { overflow: hidden; }
 .aff__notes li { padding: 4px 10px; border-radius: 999px; background: #f4f0ec; color: #4a4a4a; font-size: 13px; line-height: 20px; }
 .cs__live--locked { display: inline-flex; align-items: center; gap: 6px; }
 .cs__live--locked .lock-icon { flex: none; }
-.cursor__note { display: flex; align-items: flex-start; gap: 8px; max-width: 300px; white-space: normal; }
-.cursor__note .lock-icon { flex: none; margin-top: 3px; }
 .cs__note { margin: 8px 0 0; color: var(--muted); font-size: 14px; line-height: 20px; }
 .cs__live:hover { color: var(--plum); }
 .cs__live:hover span { transform: translate(2px, -2px); }
