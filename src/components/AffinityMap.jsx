@@ -4,7 +4,7 @@ const THEMES = [
   {
     name: 'Time and access',
     color: '#c99a1e',
-    finding: 'The bottleneck was access, not analysis.',
+    finding: 'The bottleneck was getting to the data at all.',
     quote: 'I lose an hour before I even start.',
     notes: ['Logs in to each dictionary separately', 'Five browser tabs open at once'],
   },

@@ -20,17 +20,26 @@ export function ContactLinks({ className = '' }) {
 const GREETINGS = ['oi!', 'tudo bem?', 'hi hi!', 'olá!', 'that tickles', 'eita!', 'welcome in!', 'boo!', 'still here :)'];
 
 // The self-portrait: blinks on a timer, looks toward a hovered project, tips on hover, and flips
-// the custom cursor to white while it's over the dark parts of the drawing.
+// the custom cursor to white while it's over the dark parts of the drawing. On a phone there's no
+// hover, so a tap does the same: she tips, blinks and says the next line for a moment.
+// Until someone plays with her, a small note beside her says how.
 
-function Portrait({ lookRight }) {
+const SAY_MS = 1800;
+
+export function Portrait({ lookRight = false, touch = false, className = '' }) {
   const { motion } = useEnv();
   const ref = useRef(null);
   const [hover, setHover] = useState(false);
   const [greeting, setGreeting] = useState(GREETINGS.length - 1); // first hover lands on 'oi!'
   const [blinking, setBlinking] = useState(false);
+  // Shown on every visit until she's played with, so the invitation is always there for someone new.
+  const [played, setPlayed] = useState(false);
   const blinkingRef = useRef(false);
   const blinkTimer = useRef(0);
+  const sayTimer = useRef(0);
   const pixels = useRef(null);
+
+  const play = () => setPlayed(true);
 
   const blink = useCallback(() => {
     if (!motion || blinkingRef.current) return;
@@ -43,6 +52,18 @@ function Portrait({ lookRight }) {
     const id = setInterval(blink, 4800);
     return () => { clearInterval(id); clearTimeout(blinkTimer.current); blinkingRef.current = false; };
   }, [blink]);
+
+  useEffect(() => () => clearTimeout(sayTimer.current), []);
+
+  // A tap is a short hover: the next line, a tip and a blink, then she settles back.
+  const tap = () => {
+    setGreeting((g) => (g + 1) % GREETINGS.length);
+    setHover(true);
+    blink();
+    play();
+    clearTimeout(sayTimer.current);
+    sayTimer.current = setTimeout(() => setHover(false), SAY_MS);
+  };
 
   const onMove = (e) => {
     const el = ref.current;
@@ -78,14 +99,17 @@ function Portrait({ lookRight }) {
     ref.current?.removeAttribute('data-dark');
   };
 
+  const hover_ = touch
+    ? { onClick: tap, onKeyDown: (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); tap(); } } }
+    : { onMouseMove: onMove, onMouseEnter: () => { setGreeting((g) => (g + 1) % GREETINGS.length); setHover(true); blink(); play(); }, onMouseLeave: leave };
+
   return (
     <div
       ref={ref}
-      className="portrait"
+      className={`portrait${touch ? ' portrait--touch' : ''}${className ? ` ${className}` : ''}`}
       style={{ transform: hover && motion ? 'rotate(-4deg) translateY(-2px)' : 'none' }}
-      onMouseMove={onMove}
-      onMouseEnter={() => { setGreeting((g) => (g + 1) % GREETINGS.length); setHover(true); blink(); }}
-      onMouseLeave={leave}
+      {...(touch && { role: 'button', tabIndex: 0, 'aria-label': 'Say hi to Genna’s self-portrait' })}
+      {...hover_}
     >
       <img className="portrait__base" src="/assets/v8/avatar-left.png" alt="Genna's self-portrait" />
       <img className="portrait__layer" src="/assets/v8/avatar-right.png" alt="" style={{ opacity: !blinking && lookRight && !hover ? 1 : 0 }} />
@@ -99,6 +123,9 @@ function Portrait({ lookRight }) {
         }}
       >
         {GREETINGS[greeting]}
+      </span>
+      <span className="portrait__hint" aria-hidden="true" style={{ opacity: played || hover ? 0 : 1 }}>
+        {touch ? 'click me!' : 'hover me!'}
       </span>
     </div>
   );
@@ -127,7 +154,7 @@ export default function Sidebar({ active, onNav, lookRight }) {
     <aside className="sidebar">
       <Portrait lookRight={lookRight} />
       <div className="sidebar__name">Genna Gonzaga</div>
-      <p className="sidebar__school">CS &amp; Visual Arts @ Columbia</p>
+      <p className="sidebar__school">CS &amp; Visual Arts @ Columbia ’27</p>
       <p className="sidebar__bio" data-text="1">
         I’m a product designer and engineer who likes to make software feel handmade.
       </p>

@@ -3,7 +3,6 @@ import Toc from './Toc.jsx';
 import KeyedClip from './KeyedClip.jsx';
 import MistakeJourney from './MistakeJourney.jsx';
 import AffinityMap from './AffinityMap.jsx';
-import Cursor from './Cursor.jsx';
 
 function LockIcon() {
   return (
@@ -241,7 +240,7 @@ function Story({ study }) {
 }
 
 export default function CaseStudy({ project, upNext, phase, full, onToggleFull, onClose, onSwitch }) {
-  const { motion, narrow, fine } = useEnv();
+  const { motion, narrow } = useEnv();
   const phone = useMediaQuery('(max-width: 600px)');
   const scroller = useRef(null);
   const dialog = useRef(null);
@@ -345,18 +344,14 @@ export default function CaseStudy({ project, upNext, phase, full, onToggleFull, 
                   <h1 className="cs__h1">{project.name}</h1>
                   {study ? (
                     <>
-                      {study.live && !study.liveLocked && (
+                      {study.live && (
                         <a className="cs__live" href={study.live} target="_blank" rel="noreferrer">Try it live <span aria-hidden="true">↗</span></a>
                       )}
-                      {/* Locked: the demo is on request, so the link is a lock, and hovering it says why */}
-                      {study.live && study.liveLocked && (
-                        <span className={`cs__live cs__live--locked${fine ? ' card--cursor' : ''}`} tabIndex={0} aria-describedby="cs-live-note">
-                          Try it live <LockIcon />
-                          {fine && <Cursor><span className="cursor__note"><LockIcon /> {study.note}</span></Cursor>}
-                        </span>
+                      {/* Not public yet: say so plainly instead of a link */}
+                      {!study.live && study.demo && (
+                        <p className="cs__live cs__live--locked"><LockIcon /> {study.demo}</p>
                       )}
-                      {study.note && (!study.liveLocked || !fine) && <p className="cs__note" id="cs-live-note">{study.note}</p>}
-                      {study.note && study.liveLocked && fine && <span className="sr-only" id="cs-live-note">{study.note}</span>}
+                      {study.note && <p className="cs__note">{study.note}</p>}
                     </>
                   ) : (
                     <p className="cs__lede">
