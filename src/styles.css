@@ -267,9 +267,8 @@ html:has(.viewer[open]) { overflow: hidden; }
 .slot__empty svg { opacity: .45; }
 
 /* ---------- play ---------- */
-.play { min-height: calc(100vh - 160px); display: flex; flex-direction: column; justify-content: center; gap: 48px; padding: 24px 0 64px; overflow-x: clip; }
-.play__stage { display: grid; grid-template-columns: minmax(0, 1fr); gap: 48px; align-items: center; }
-@media (min-width: 1100px) { .play__stage { grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); } }
+.play { display: flex; flex-direction: column; gap: 48px; padding: 24px 0 64px; overflow-x: clip; }
+.play__head { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 16px 40px; }
 
 /* The wordmark: every letter tilts its own way and bobs a little; poke one and it springs. */
 @keyframes playBob { 0%, 100% { translate: 0 0; } 50% { translate: 0 -.035em; } }
@@ -291,32 +290,25 @@ html:has(.viewer[open]) { overflow: hidden; }
 .play__spark--a { width: .16em; left: .04em; top: -.14em; }
 .play__spark--b { width: .12em; right: -.14em; top: .12em; animation-delay: -1.3s; }
 
-/* A fanned stack of blank pages; it opens up when you hover. Only on wide screens, where it sits beside the word. */
-.play__pages { position: relative; justify-self: center; width: min(100%, 340px); aspect-ratio: 4 / 5; }
-.play__page {
-  position: absolute; inset: 0; display: block; width: 100%; height: 100%; border-radius: 12px; background: #fff;
-  box-shadow: 0 1px 2px rgba(74, 21, 56, .08), 0 16px 40px rgba(74, 21, 56, .12);
-  transition: rotate 500ms cubic-bezier(.3, 1.4, .5, 1), translate 500ms cubic-bezier(.3, 1.4, .5, 1), scale 500ms cubic-bezier(.3, 1.4, .5, 1);
-}
-.play__page--back { rotate: -9deg; translate: -7% 3%; background: #f3e9ee; }
-.play__page--mid { rotate: 5deg; translate: 6% -2%; background: #fdf9fb; }
-.play__page--front { rotate: -2deg; background-image: radial-gradient(#ead9e2 1px, transparent 1px); background-size: 16px 16px; }
-.play__pages:hover .play__page--back { rotate: -15deg; translate: -16% 5%; }
-.play__pages:hover .play__page--mid { rotate: 10deg; translate: 15% -4%; }
-.play__pages:hover .play__page--front { rotate: 0deg; scale: 1.03; }
+.play__copy { margin: 0 0 .6em; max-width: 480px; font-size: 20px; line-height: 28px; color: #3d3539; text-wrap: pretty; }
 
-.play__note { display: flex; flex-direction: column; align-items: flex-start; gap: 16px; }
-.play__soon {
-  display: inline-flex; align-items: center; padding: 8px 16px; border: 1px solid #f0e2e9; border-radius: 999px;
-  background: #fff; color: var(--plum); font-size: 14px; line-height: 20px; font-weight: 500; letter-spacing: .02em;
+/* The mural: hung like a small show, straight, matted and evenly spaced */
+/* the page spaces its sections 48px apart; pull the grid up so the feature sits one mural gap above it */
+.mural__item.mural__feature { margin: 0 0 -20px; padding: 18px; }
+.mural { columns: 3 260px; column-gap: 28px; margin: 0; padding: 0; list-style: none; }
+.mural__item {
+  break-inside: avoid; margin: 0 0 28px; padding: 14px; background: #fff;
+  box-shadow: 0 0 0 1px rgba(74, 21, 56, .06), 0 1px 2px rgba(74, 21, 56, .06), 0 12px 28px -14px rgba(74, 21, 56, .22);
+  transition: translate 320ms var(--ease), box-shadow 320ms var(--ease);
 }
-.play__copy { margin: 0; max-width: 480px; font-size: 20px; line-height: 28px; color: #3d3539; text-wrap: pretty; }
-/* Without the pages beside it, everything centers so the page doesn't lean left. */
+.mural__item img { display: block; width: 100%; height: auto; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .06); }
+.mural__item:hover { translate: 0 -4px; box-shadow: 0 0 0 1px rgba(74, 21, 56, .08), 0 2px 4px rgba(74, 21, 56, .08), 0 22px 40px -16px rgba(74, 21, 56, .3); }
+@media (max-width: 600px) { .mural { columns: 2; column-gap: 12px; } .mural__item { padding: 8px; margin-bottom: 12px; } .mural__item.mural__feature { padding: 10px; margin-bottom: -36px; } }
+@media (prefers-reduced-motion: reduce) { .mural__item { transition: none; } .mural__item:hover { translate: none; } }
+/* On narrower screens the heading centers, the way the rest of the page reads there */
 @media (max-width: 1099px) {
-  .play__pages { display: none; }
-  .play { align-items: center; text-align: center; }
+  .play__head { flex-direction: column; align-items: center; text-align: center; }
   .play__word { margin-left: 0; }
-  .play__note { align-items: center; }
 }
 
 /* ---------- footer ---------- */
