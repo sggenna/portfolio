@@ -30,6 +30,7 @@ export const STUDIES = {
       { l: 'Tools', v: 'Figma, Figma Make, React, Firebase, Python' },
     ],
     hero: { video: '/assets/platepal/hero.mp4', cut: { vw: 1920, vh: 1080, x: 740, y: 86, w: 440, h: 908, radius: 72, track: [[0, 746, 90, 428, 900]] }, alt: 'Scanning a plate in PlatePal, seeing its estimated macros, and logging the meal' },
+    problem: { h: 'No nutrition info in any dining hall.', p: 'Students with fitness goals had to guess what to eat at every meal.' },
     tldr: 'PlatePal recommends meals across Columbia’s 12+ dining halls based on each student’s goals, and shows the macros for every pick. Students can also take a photo of their plate to estimate its macros and log it, kind of like MyFitnessPal but built for Columbia dining.',
     stats: [
       { v: '93%', l: 'of testers rated PlatePal 5 out of 5 (n=15)' },
@@ -158,6 +159,7 @@ export const STUDIES = {
       phoneFrame: { src: '/assets/diciobase/demos/tour-embed.html', w: 358, h: 720 },
       alt: 'A tour of Diciobase: searching saudade from the orbit home page, switching its entry between three dictionaries, seeing where they agree on a meaning, and following the synonym nostalgia to its own entry.',
     },
+    problem: { h: 'One word took 23 steps.', p: 'Linguists checked dictionaries book by book, and only 4 of those steps were actual research.' },
     tldr: 'Diciobase is a dictionary platform for linguists. You search a Portuguese word once and see what several dictionaries say about it, each in its own original structure.',
     stats: [
       { v: '4 min', l: 'per lookup in early testing, down from a whole morning' },
@@ -287,6 +289,7 @@ export const STUDIES = {
       { l: 'Tools', v: 'Figma, React, Claude Code' },
     ],
     hero: { video: '/assets/bloomin/site-scroll.mp4', poster: '/assets/bloomin/site-scroll-poster.webp', phoneVideo: '/assets/bloomin/site-scroll-phone.mp4', phonePoster: '/assets/bloomin/site-scroll-phone-poster.webp', ratio: '16 / 10', phoneRatio: '390 / 844', big: true, bare: true, alt: 'Scrolling through the Bloomin’ landing page, from the hero through courses, Jamile, how classes work, testimonials, the FAQ and contact' },
+    problem: { h: 'A school with no name.', p: 'Jamile ran her school from an Instagram page and answered the same six questions in her DMs every day.' },
     tldr: 'Jamile runs an online English school, and before Bloomin’ all she had was an Instagram page, with no name, logo, or website. I designed the brand and built a mobile-first landing page that answers the questions she used to answer one by one in her DMs. Now I’m designing the platform her students learn on.',
     stats: [
       { v: '20%', l: 'more enrolled students since launch' },
@@ -377,6 +380,7 @@ export const STUDIES = {
       { l: 'Tools', v: 'Figma, React, Express' },
     ],
     hero: { video: '/assets/bloomin-platform/hero-student.mp4', ratio: '16 / 10', alt: 'A student starts a lesson from Início: a wrong answer brings Bloom’s hint, the right answer earns XP, and Lição concluída shows the results' },
+    problem: { h: 'Five apps to run one class.', p: 'Students didn’t know what to do each day, and Jamile couldn’t see who was falling behind.' },
     tldr: 'Bloomin’ is the learning platform for Professora Jamile’s online English school. Students take lessons, practice, and turn in homework, and Jamile runs her classes and keeps track of everyone in the same place.',
     stats: [
       { v: '90 sec', l: 'to set up a new student, down from 20 min' },
