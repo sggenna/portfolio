@@ -379,7 +379,6 @@ export const STUDIES = {
     tldr: 'Bloomin’ is the learning platform for Professora Jamile’s online English school. Students take lessons, practice, and turn in homework, and Jamile runs her classes and keeps track of everyone in the same place.',
     stats: [
       { v: '90 sec', l: 'Student setup, from 20 min', dir: 'down' },
-      { v: '5 → 1', l: 'Apps to run the school' },
     ],
     chapters: [
       {
