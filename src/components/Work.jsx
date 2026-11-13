@@ -157,10 +157,12 @@ function ProjectCard({ p, hovered, onEnter, onLeave, onOpen }) {
         </div>
       </div>
       <div className="card__body" style={{ transform: lift ? 'translateX(4px)' : 'none' }}>
-        <span className="card__title" style={{ color: hovered ? '#b21f86' : '#111' }}>{p.name}</span>
-        <span className="card__line" data-text="1">{p.line}</span>
-        <span className="card__outcome" style={{ color: p.outcome ? '#111' : '#6b6b6b' }}>
-          {p.outcome || 'Outcome — add one result'}
+        {/* One line: the name in plum, then the outcome in gray. The slash stays with the name when it wraps. */}
+        <span className="card__caption">
+          <span className="card__title" style={hovered ? { color: 'var(--magenta)' } : undefined}>
+            {p.name}{p.caption && <span className="card__slash"> /</span>}
+          </span>
+          {p.caption && <> <span className="card__outcome">{p.caption}</span></>}
         </span>
         {fine && p.soon && <span className="sr-only">Coming soon</span>}
         {!fine && <span className="card__cta">{p.soon ? 'Coming soon' : 'View case study →'}</span>}

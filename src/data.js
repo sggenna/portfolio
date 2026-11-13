@@ -3,10 +3,10 @@
 // A `#t=<seconds>` on `video` picks the frame the card rests on before it plays.
 // `frame` puts a live page on the card instead, at its design size; it's told 'play' and 'stop' as the card is hovered.
 export const PROJECTS = [
-  { key: 'platform', slug: 'bloomin/platform', name: "Bloomin' platform", line: 'One place for an English school to grow.', meta: 'Product design · Full stack · 2025–now', outcome: '20 min → 90 sec student setup', tags: ['In testing'], video: '/assets/bloomin-platform/cover-teacher-hd.mp4#t=2', fit: '#781444', framed: true, poster: '' },
-  { key: 'dicio', slug: 'diciobase', name: 'Diciobase', line: "Brazil's dictionaries, one search.", meta: 'Product design · Full stack · 2025–2026', outcome: '23→1 steps per lookup', tags: ['Beta', 'Demo on request'], frame: { src: '/assets/diciobase/demos/search-embed.html', w: 720, h: 405 }, poster: '/assets/diciobase/card-poster.jpg', color: '#141414' },
-  { key: 'plate', slug: 'platepal', name: 'PlatePal', line: 'Meal picks that fit your goals at every Columbia dining hall.', meta: 'Product design · Full stack · 2025', outcome: '93% of testers rated it 5 out of 5', tags: ['0→1'], video: '/assets/platepal/cover-solid.mp4#t=8', color: '#2f6f4f', poster: '', zoom: 1.16 },
-  { key: 'bloomin', slug: 'bloomin', name: "Bloomin'", line: 'An English school that grew out of an Instagram page.', meta: 'Branding · Web · 2025–2026', outcome: '20% more enrolled students', tags: ['0→1', 'Branding', 'Shipped'], video: '/assets/bloomin/logo-bloom.mp4#t=2.8', poster: '' },
+  { key: 'platform', slug: 'bloomin/platform', name: "Bloomin' platform", caption: 'The school’s learning app, setup 20\u00a0min\u00a0→\u00a090\u00a0sec', line: 'One place for an English school to grow.', meta: 'Product design · Full stack · 2025–now', outcome: '20 min → 90 sec student setup', tags: ['In testing'], video: '/assets/bloomin-platform/cover-teacher-hd.mp4#t=2', fit: '#781444', framed: true, poster: '' },
+  { key: 'dicio', slug: 'diciobase', name: 'Diciobase', caption: 'Brazil’s dictionaries, 23\u00a0steps\u00a0→\u00a01\u00a0search', line: "Brazil's dictionaries, one search.", meta: 'Product design · Full stack · 2025–2026', outcome: '23→1 steps per lookup', tags: ['Beta', 'Demo on request'], frame: { src: '/assets/diciobase/demos/search-embed.html', w: 720, h: 405 }, poster: '/assets/diciobase/card-poster.jpg', posterW: 1440, posterH: 810, color: '#141414' },
+  { key: 'plate', slug: 'platepal', name: 'PlatePal', caption: 'Meal picks for every Columbia dining hall', line: 'Meal picks that fit your goals at every Columbia dining hall.', meta: 'Product design · Full stack · 2025', outcome: '93% of testers rated it 5 out of 5', tags: ['0→1'], video: '/assets/platepal/cover-solid.mp4#t=8', color: '#2f6f4f', poster: '', zoom: 1.16 },
+  { key: 'bloomin', slug: 'bloomin', name: "Bloomin'", caption: 'Brand and site for an English school, 20% more students', line: 'An English school that grew out of an Instagram page.', meta: 'Branding · Web · 2025–2026', outcome: '20% more enrolled students', tags: ['0→1', 'Branding', 'Shipped'], video: '/assets/bloomin/logo-bloom.mp4#t=2.8', poster: '' },
 ];
 
 // Written case studies, keyed by project. Projects without one show the template case study.
@@ -18,7 +18,8 @@ export const PROJECTS = [
 // `frame` embeds a live HTML prototype, scaled to fit, at its design size `w` by `h`.
 // `compare: true` lays a row's media side by side, full width, for before/after screens; `cap` labels each one, `caps` puts a bold label (optional { l, d } for a note under it) under each thing in an image. `beside: true` keeps a pair next to the text instead of full width.
 // Rows: `p` (string, list, or { lead, text }), then `bullets` ({ lead?, text }), then `after`. `h` is optional.
-// Quotes take an optional `avatar` image; without one they show the speaker's initials, and `avatar: false` hides it.
+// Quotes credit the speaker by first name, then who they are: 'Kaylie, Columbia student'. They show the speaker's
+// initials, or an optional `avatar` image.
 // A row with its own `quote`/`cite` shows that quote under its text; a lone { quote, cite } is a centered pull quote.
 export const STUDIES = {
   plate: {
@@ -32,23 +33,19 @@ export const STUDIES = {
     hero: { video: '/assets/platepal/hero.mp4', cut: { vw: 1920, vh: 1080, x: 740, y: 86, w: 440, h: 908, radius: 72, track: [[0, 746, 90, 428, 900]] }, alt: 'Scanning a plate in PlatePal, seeing its estimated macros, and logging the meal' },
     problem: { h: 'No nutrition info in any dining hall.', p: 'Students with fitness goals had to guess what to eat at every meal.' },
     tldr: 'PlatePal recommends meals across Columbia’s 12+ dining halls based on each student’s goals, and shows the macros for every pick. Students can also take a photo of their plate to estimate its macros and log it, kind of like MyFitnessPal but built for Columbia dining.',
-    stats: [
-      { v: '93%', l: 'of testers rated PlatePal 5 out of 5 (n=15)' },
-      { v: '83%', l: 'of students rated their existing dining tools 1–2 out of 5 (n=12)' },
-    ],
     chapters: [
       {
         id: 'cs-research',
         label: 'Research',
         rows: [
           {
-            h: 'Every meal was a guessing game',
+            h: 'We followed 5 students through dinner',
             quote: 'Concrete numbers would be a lot better than this guessing game.',
             cite: 'Savannah, Columbia student',
-            p: 'We surveyed 12 students and followed 5 of them through a whole meal, from picking a hall to sitting down to eat. When they looked up what to eat, Lion Dine had no nutrition info, and the Columbia Dining website only showed the day’s menu. So students with specific goals were left guessing.',
+            p: 'We surveyed 12 students and followed 5 of them through a whole meal, from picking a hall to sitting down to eat. When they looked up what to eat, Lion Dine had no nutrition info, and the Columbia Dining website only showed the day’s menu.',
           },
           {
-            h: 'Most students had a goal and no way to hit it',
+            h: 'Goal-driven students were the biggest group',
             p: 'Our affinity map showed three types of diners: goal-driven, convenience-driven, and habit-based. Goal-driven students were the biggest group and the most affected by the missing nutrition info, so I designed for them first while keeping the app fast for everyone else.',
             media: { img: '/assets/platepal/motivation.png', w: 1152, h: 400, alt: 'Three types of diners: 58% goal-driven, 25% convenience, 17% habit' },
           },
@@ -129,7 +126,7 @@ export const STUDIES = {
         rows: [
           {
             h: 'Knowing how much people want to see',
-            p: 'We could have made every screen as helpful as possible by adding everything we knew about a meal. But we’re college students with short lunch breaks and a lot going on, and nobody has time to think through everything that goes into a meal. Sometimes an app that just tells you what to eat is the best thing that happens in your day. Listening to students showed me what to cut, so nothing stands between them and their food.',
+            p: 'Every screen got better when I cut something. Sometimes an app that just tells you what to eat is the best thing that happens in your day.',
           },
           {
             h: 'Every number is still an estimate',
@@ -162,8 +159,8 @@ export const STUDIES = {
     problem: { h: 'One word took 23 steps.', p: 'Linguists checked dictionaries book by book, and only 4 of those steps were actual research.' },
     tldr: 'Diciobase is a dictionary platform for linguists. You search a Portuguese word once and see what several dictionaries say about it, each in its own original structure.',
     stats: [
-      { v: '4 min', l: 'per lookup in early testing, down from a whole morning' },
-      { v: '23 → 1', l: 'steps to one search' },
+      { v: '4 min', l: 'Per lookup in early tests', dir: 'down' },
+      { v: '23 → 1', l: 'Steps to one search' },
     ],
     chapters: [
       {
@@ -171,11 +168,10 @@ export const STUDIES = {
         label: 'Research',
         rows: [
           {
-            h: 'Only 4 of 23 steps were actual research',
+            h: 'Watching real lookups',
             quote: 'Before I can actually do research I spend two hours getting data into a readable format.',
-            cite: 'PhD researcher, UFBA',
-            avatar: false,
-            p: 'I interviewed researchers in Brazil and Portugal and watched them do real lookups. They were working from physical dictionaries, going book by book, and looking up one word took 23 steps. Only 4 of those steps were the research they actually came to do.',
+            cite: 'Daniela, PhD researcher at UFBA',
+            p: 'I interviewed researchers in Brazil and Portugal and watched them look up words in physical dictionaries, then mapped every step of one lookup.',
             wide: true,
             media: { img: '/assets/diciobase/task-map-hd.webp', w: 2981, h: 1427, alt: 'Task map of a single lookup: 23 steps across Prepare, Search, Synthesise and Cite' },
           },
@@ -186,8 +182,7 @@ export const STUDIES = {
           {
             h: '“Please don’t clean up our data”',
             quote: 'I care about the word in front of me and where it came from.',
-            cite: 'Master’s student, University of Lisbon',
-            avatar: false,
+            cite: 'Rita, Master’s student at the University of Lisbon',
             p: [
               'This was the clearest thing I heard across the interviews. Researchers look at different dictionaries because each one builds its entries differently, and those differences are exactly what they study. Merging everything into one format would have taken that away and made Diciobase useless to them.',
               'So the real question became: how do you put every dictionary in one place and keep what makes each one different?',
@@ -266,10 +261,10 @@ export const STUDIES = {
         id: 'cs-reflection',
         label: 'Reflection',
         rows: [
-          { quote: 'I looked up a word for a paper. It took me four minutes including reading the results. That used to take my whole morning.', cite: 'PhD researcher, UFBA, after testing', avatar: false },
+          { quote: 'I looked up a word for a paper. It took me four minutes including reading the results. That used to take my whole morning.', cite: 'Daniela, PhD researcher at UFBA, after testing' },
           {
             h: 'Watch the workflow behind the habit',
-            p: 'Laying dictionaries side by side was how researchers worked on paper, so I assumed they’d want it on screen. Watching them showed me the questions they were actually trying to answer, and the design is built around those now.',
+            p: 'Now I look for the question behind a habit before I design for the habit.',
           },
           {
             h: 'What I’d test next',
@@ -290,10 +285,10 @@ export const STUDIES = {
     ],
     hero: { video: '/assets/bloomin/site-scroll.mp4', poster: '/assets/bloomin/site-scroll-poster.webp', phoneVideo: '/assets/bloomin/site-scroll-phone.mp4', phonePoster: '/assets/bloomin/site-scroll-phone-poster.webp', ratio: '16 / 10', phoneRatio: '390 / 844', big: true, bare: true, alt: 'Scrolling through the Bloomin’ landing page, from the hero through courses, Jamile, how classes work, testimonials, the FAQ and contact' },
     problem: { h: 'A school with no name.', p: 'Jamile ran her school from an Instagram page and answered the same six questions in her DMs every day.' },
-    tldr: 'Jamile runs an online English school, and before Bloomin’ all she had was an Instagram page, with no name, logo, or website. I designed the brand and built a mobile-first landing page that answers the questions she used to answer one by one in her DMs. Now I’m designing the platform her students learn on.',
+    tldr: 'Jamile runs an online English school. I named it, designed the brand, and built a mobile-first landing page that answers students’ most common questions. Now I’m designing the platform her students learn on.',
     stats: [
-      { v: '20%', l: 'more enrolled students since launch' },
-      { v: '80%', l: 'fewer students asking the same questions, from a month of Jamile tracking her DMs after launch' },
+      { v: '20%', l: 'Enrolled students', dir: 'up' },
+      { v: '80%', l: 'Repeat questions in DMs', dir: 'down' },
     ],
     chapters: [
       {
@@ -301,8 +296,8 @@ export const STUDIES = {
         label: 'Research',
         rows: [
           {
-            h: 'A whole English school running out of one Instagram page',
-            p: 'Almost all of Jamile’s students found her on Instagram, and every conversation happened in her DMs or on WhatsApp. She did all her own marketing, so the branding never stuck, and she spent hours answering the same questions.',
+            h: 'Every student came through her DMs',
+            p: 'Almost all of Jamile’s students found her on Instagram, and every conversation happened in her DMs or on WhatsApp. She did all her own marketing, so the branding never stuck.',
             media: { img: '/assets/bloomin/instagram-dms.webp', w: 2800, h: 2890, alt: 'Her old Instagram profile in yellow and red next to a list of blurred DMs asking the same questions' },
           },
           {
@@ -329,7 +324,7 @@ export const STUDIES = {
             p: 'Jamile wanted bright, saturated colors, and honestly I started there too. But when we looked at English schools using saturated palettes, they were mostly targeting younger learners. For adults with careers, that would read more like a children’s book. So we went with one deep burgundy pink for actions and soft lilacs and cream for everything else. It’s still playful, since it’s an English school, and it feels grown-up. Geist keeps the type clean, and each course level gets its own bloom.',
             wide: true,
             media: [
-              { video: '/assets/bloomin/design-system.mp4', cut: { vw: 1400, vh: 860, x: 36, y: 36, w: 1328, h: 788, radius: 21, full: true, blend: true, track: [[0, 36, 36, 1328, 788]] }, alt: 'The Bloomin design system: Geist type, logo, buttons, plum, cream and pink colors sliding across, and one bloom illustration per course level' },
+              { live: 'bloomin-system', alt: 'The Bloomin’ design system: Geist type in four weights, the logo and monogram, the site’s buttons and links, and the plum, cream and pink palette sliding past' },
             ],
           },
           {
@@ -383,8 +378,8 @@ export const STUDIES = {
     problem: { h: 'Five apps to run one class.', p: 'Students didn’t know what to do each day, and Jamile couldn’t see who was falling behind.' },
     tldr: 'Bloomin’ is the learning platform for Professora Jamile’s online English school. Students take lessons, practice, and turn in homework, and Jamile runs her classes and keeps track of everyone in the same place.',
     stats: [
-      { v: '90 sec', l: 'to set up a new student, down from 20 min' },
-      { v: '5 → 1', l: 'apps to run the school' },
+      { v: '90 sec', l: 'Student setup, from 20 min', dir: 'down' },
+      { v: '5 → 1', l: 'Apps to run the school' },
     ],
     chapters: [
       {
@@ -392,18 +387,16 @@ export const STUDIES = {
         label: 'Research',
         rows: [
           {
-            h: 'Five apps to run one English class',
+            h: 'Everything lived in a different app',
             quote: 'Sometimes I finish a lesson and I’m not sure if I’m done or if I missed something.',
-            cite: 'Beginner student, working full-time',
-            avatar: false,
+            cite: 'Paloma, Beginner student working full-time',
             p: 'Classes were on Meet, homework on WhatsApp or Forms, and recordings on YouTube or Drive. Jamile tracked everything by hand, which wasn’t going to work as the school grew.',
             media: { img: '/assets/bloomin-platform/five-apps.webp', w: 2800, h: 1670, alt: 'Meet, WhatsApp, Drive, YouTube, and Forms all pointing at Ana, a B1 student with five apps to open before class' },
           },
           {
-            h: 'Students needed today’s task. Jamile needed to know who was slipping.',
+            h: 'One rule for every page',
             quote: 'I just want to open it and see what I should do today.',
-            cite: 'Maria Eduarda, preparing to move abroad',
-            avatar: false,
+            cite: 'Maria Eduarda, Student preparing to move abroad',
             p: 'I had Jamile and three students walk me through a normal session, and it gave me one rule for every page: whatever helps you figure out what to do next goes up front, and everything else is one click away.',
           },
           {
@@ -452,8 +445,8 @@ export const STUDIES = {
             media: { img: '/assets/bloomin-platform/bloom-growing.webp', w: 492, h: 600, small: true, alt: 'Bloom growing from a seed to full bloom, A1 to C2' },
           },
           {
-            h: 'Twenty minutes of setup, down to ninety seconds',
-            p: 'Students open Jamile’s invite, pick a daily goal, and they’re in their first lesson. Across 10 timed test sessions, setup took about 90 seconds.',
+            h: 'From invite to first lesson',
+            p: 'Before, Jamile spent about 20 minutes per new student adding them to WhatsApp, sharing the Drive folder and Forms, and sending the Meet link. Now students open her invite, pick a daily goal, and they’re in their first lesson. Across 10 timed test sessions, setup took about 90 seconds.',
             media: { video: '/assets/bloomin-platform/onboarding.mp4', alt: 'Opening Jamile’s invite, setting a daily goal, and landing in the first lesson' },
           },
         ],
@@ -472,7 +465,7 @@ export const STUDIES = {
           },
           {
             h: 'Next: contracts and exams, without the weight',
-            p: 'We’re adding contract signing and, later, exams. The hard part will be fitting them in for students who just want to open it and see what to do today.',
+            p: 'We’re adding contract signing and, later, exams. The hard part will be fitting them in without crowding Hoje and Tarefas.',
           },
         ],
       },
@@ -496,7 +489,7 @@ export const EXPERIENCE = [
 export const THINGS = [
   { id: 'about-radio', slug: 'radio', short: 'Doing student radio', cap: 'On student radio, aka making people listen to my playlists', ph: 'Photo: doing radio' },
   { id: 'about-cats', slug: 'cats', short: 'Making cat friends', cap: 'Every cat I meet is a friend I haven’t made yet', ph: 'Photo: with a cat' },
-  { id: 'about-drawing', slug: 'drawing', short: 'Drawing with graphite', cap: 'Drawing with graphite', ph: 'Photo: drawing' },
+  { id: 'about-hiking', slug: 'hiking', short: 'Hiking', cap: 'Out hiking, my favorite way to spend a day', ph: 'Photo: hiking' },
   { id: 'about-sophia', slug: 'sophia', short: 'Cat auntie to Sophia', cap: 'Proud cat auntie to Sophia', ph: 'Photo: Sophia' },
   { id: 'about-food', slug: 'food', short: 'Eating through the city', cap: 'Eating my way through the city', ph: 'Photo: food' },
   { id: 'about-colorstack', slug: 'colorstack', short: 'ColorStack socials', cap: 'Running ColorStack Columbia socials', ph: 'Photo: ColorStack' },

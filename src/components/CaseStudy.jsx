@@ -3,6 +3,8 @@ import Toc from './Toc.jsx';
 import KeyedClip from './KeyedClip.jsx';
 import MistakeJourney from './MistakeJourney.jsx';
 import AffinityMap from './AffinityMap.jsx';
+import BloominSystem from './BloominSystem.jsx';
+import './BloominSystem.css';
 
 function LockIcon() {
   return (
@@ -79,7 +81,10 @@ function Clip({ src, poster, label, style, eager, tracked }) {
     io.observe(v.parentElement);
     return () => io.disconnect();
   }, [motion, src]);
-  return <video ref={ref} src={src} poster={poster} muted loop playsInline preload={eager ? 'auto' : 'metadata'} controls={!motion} aria-label={label} style={style} />;
+  // With reduced motion the video waits for a press. Without a poster that would be a black box, so start it a
+  // moment in: the browser then loads and shows the first frame as a still.
+  const still = !motion && !poster && !src.includes('#t=') ? `${src}#t=0.1` : src;
+  return <video ref={ref} src={still} poster={poster} muted loop playsInline preload={eager ? 'auto' : 'metadata'} controls={!motion} aria-label={label} style={style} />;
 }
 
 // Zooms a video to the `cut` region and masks away everything else.
@@ -127,6 +132,15 @@ function LiveFrame({ src, w, h, title, phone, demo }) {
   );
 }
 
+// A drawn arrow in an impact figure: up for a rise, down for a drop, across for a before-and-after like 23 → 1.
+function Trend({ dir }) {
+  return (
+    <svg className="cs__trend" viewBox="0 0 16 16" width={dir === 'to' ? 20 : 16} height={dir === 'to' ? 20 : 16} fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-label={{ up: 'Up', down: 'Down', to: 'to' }[dir]} role="img">
+      <path d={{ up: 'M8 13V3M3.5 7.5 8 3l4.5 4.5', down: 'M8 3v10M3.5 8.5 8 13l4.5-4.5', to: 'M3 8h10M8.5 3.5 13 8l-4.5 4.5' }[dir]} />
+    </svg>
+  );
+}
+
 function Media({ m }) {
   const { motion } = useEnv();
   const fig = m.todo ? <div className="cs__fig cs__fig--empty"><span>{m.todo}</span></div> : (
@@ -138,6 +152,7 @@ function Media({ m }) {
       {m.frame && !motion && m.stillVideo && <KeyedClip src={m.stillVideo} label={m.alt} />}
       {m.live === 'mistake-journey' && <MistakeJourney label={m.alt} />}
       {m.live === 'affinity-map' && <AffinityMap label={m.alt} />}
+      {m.live === 'bloomin-system' && <BloominSystem label={m.alt} />}
       {m.frame || m.live ? null : m.video
         ? <Clip src={m.video} label={m.alt} style={m.cut ? cutStyle(m.cut) : undefined} tracked={m.cut?.track ? m.cut : undefined} />
         : <img src={m.img} alt={m.alt} width={m.w} height={m.h} loading="lazy" draggable={false} />}
@@ -196,10 +211,26 @@ const chaptersOf = (study) => (study.problem
 function Story({ study }) {
   return (
     <>
-      {chaptersOf(study).map((c, n) => (
+      {chaptersOf(study).map((c) => (
         <section key={c.id} id={c.id} className="cs__section cs__section--ruled cs__section--story">
-          <Label>{String(n + 1).padStart(2, '0')} / {c.label}</Label>
-          {c.rows?.map((r) => (r.h || r.p || r.media ? (
+          <Label>{c.label}</Label>
+          {/* Reflection reads as takeaways: one panel, each lesson on its own card, side by side */}
+          {c.id === 'cs-reflection' && (
+            <>
+              {c.rows.filter((r) => !r.h).map((r) => (
+                <div key={r.quote} className="cs__row cs__row--text"><div><Quote q={r} inline /></div></div>
+              ))}
+              <div className="cs__takeaways" style={{ '--n': c.rows.filter((r) => r.h).length }}>
+                {c.rows.filter((r) => r.h).map((r) => (
+                  <div key={r.h} className="cs__takeaway">
+                    <h3>{r.h}</h3>
+                    {[].concat(r.p ?? []).map((p) => <p key={p}>{p}</p>)}
+                  </div>
+                ))}
+              </div>
+            </>
+          )}
+          {c.id !== 'cs-reflection' && c.rows?.map((r) => (r.h || r.p || r.media ? (
             <div key={r.h || [].concat(r.p)[0]} className={`cs__row${r.wide || r.compare ? ' cs__row--wide' : ''}${r.media ? '' : ' cs__row--text'}`}>
               <div>
                 {r.h && <h3 className="cs__h3">{r.h}</h3>}
@@ -232,7 +263,10 @@ function Story({ study }) {
                 </div>
               )}
             </div>
-          ) : <Quote key={r.quote} q={r} />))}
+          ) : (
+            // A quote on its own row looks like every other quote, with the pink rule
+            <div key={r.quote} className="cs__row cs__row--text"><div><Quote q={r} inline /></div></div>
+          )))}
           {c.p && [].concat(c.p).map((t) => (
             <p key={t.lead || t} className="cs__big">
               {t.lead ? <><strong>{t.lead}</strong> {t.text}</> : t}
@@ -395,15 +429,19 @@ export default function CaseStudy({ project, upNext, phase, full, onToggleFull, 
                       </div>
                     )
                     : <div className="cs__hero-media"><span>{study.hero.todo}</span></div>}
-                  {study.stats && (
-                    <div className="cs__stats cs__stats--top" aria-label="Impact">
+                  {/* Impact under the hero: a row of short stats, a rosy arrow where the number is a change */}
+                  {study?.stats && (
+                    <ul className="cs__impact" aria-label="Impact">
                       {study.stats.map((r) => (
-                        <div className="cs__result" key={r.l}>
-                          <strong>{r.v}</strong>
+                        <li key={r.l}>
+                          <strong>
+                            {r.dir && <Trend dir={r.dir} />}
+                            {r.v.split(' → ').map((part, i) => (i ? [<Trend key={i} dir="to" />, part] : part))}
+                          </strong>
                           <span>{r.l}</span>
-                        </div>
+                        </li>
                       ))}
-                    </div>
+                    </ul>
                   )}
                 </div>
               ) : (
@@ -418,7 +456,7 @@ export default function CaseStudy({ project, upNext, phase, full, onToggleFull, 
                   <h2 className="cs__h2">Building a clear experience without losing what makes the brand feel human.</h2>
                   <div className="cs__two">
                     <p>The product had grown quickly, but the experience around it had not kept pace. People needed a simpler way to understand what was available and take the next step with confidence.</p>
-                    <p>I translated the character of the brand into a calm product system—one that makes complex decisions feel natural and carries smoothly from first impression to daily use.</p>
+                    <p>I translated the character of the brand into a calm product system, one that makes complex decisions feel natural and carries smoothly from first impression to daily use.</p>
                   </div>
                 </section>
 
@@ -455,7 +493,7 @@ export default function CaseStudy({ project, upNext, phase, full, onToggleFull, 
 
                 <section id="cs-outcome" className="cs__section cs__section--ruled">
                   <Label>The outcome</Label>
-                  <h2 className="cs__h2">A foundation designed to ship—and keep growing.</h2>
+                  <h2 className="cs__h2">A foundation designed to ship, and keep growing.</h2>
                   <div className="cs__three">
                     {RESULTS.map((r) => (
                       <div className="cs__result" key={r.l}>
@@ -484,7 +522,7 @@ export default function CaseStudy({ project, upNext, phase, full, onToggleFull, 
                           style={{ transform: u.zoom ? `scale(${u.zoom})` : undefined, objectFit: u.fit ? 'contain' : undefined }}
                         />
                       ) : u.poster ? (
-                        <img src={u.poster} alt="" aria-hidden="true" draggable={false} />
+                        <img src={u.poster} width={u.posterW} height={u.posterH} alt="" aria-hidden="true" draggable={false} />
                       ) : 'Product video · 16:9'}
                     </div>
                     <div className="cs__next-text">

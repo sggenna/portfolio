@@ -147,10 +147,20 @@ export default function KeyedClip({ src, label }) {
     return () => io.disconnect();
   }, [motion, src]);
 
+  // Reduced motion: hold one keyed frame from the middle of the clip, where the story is, as a still.
+  useEffect(() => {
+    const v = video.current;
+    if (!v || motion) return undefined;
+    const hold = () => { v.currentTime = v.duration / 2; };
+    if (v.readyState >= 1) hold();
+    v.addEventListener('loadedmetadata', hold);
+    return () => v.removeEventListener('loadedmetadata', hold);
+  }, [motion, src]);
+
   return (
     <div style={{ position: 'relative' }}>
-      <video ref={video} src={src} muted loop playsInline preload="auto" controls={!motion} aria-label={label} style={keyed && motion ? { opacity: 0 } : undefined} />
-      {keyed && motion && <canvas ref={canvas} aria-hidden="true" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', pointerEvents: 'none' }} />}
+      <video ref={video} src={src} muted loop playsInline preload="auto" controls={!motion && !keyed} aria-label={label} style={keyed ? { opacity: 0 } : undefined} />
+      {keyed && <canvas ref={canvas} aria-hidden="true" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', pointerEvents: 'none' }} />}
     </div>
   );
 }

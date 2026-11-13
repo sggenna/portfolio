@@ -81,7 +81,7 @@ export default function About({ photo, onOpenPhoto, onClosePhoto }) {
             I design and build products, and while I love both, the design process is where my heart is.
           </p>
           <p data-text="1">
-            I’ve always wondered why things feel right. Why does writing with my right hand feel natural but my left doesn’t? Why do we sleep with the lights off? I think it comes down to structure shaping feeling. We get used to things a certain way, and when something breaks from that, we notice. Moving from Brazil to the US to study made me hyperaware of how much “normal” is just what you’re used to.
+            I’ve always wondered why things feel right. Why does writing with my right hand feel natural but my left doesn’t? Why do we sleep with the lights off? I think it comes down to structure shaping feeling. We get used to things a certain way, and when something breaks from that, we notice. Moving from Brazil to the US to study made me hyperaware of how much “normal” is just what you’re used to. It’s also why I draw. Sitting with something long enough to draw it is the best way I know to notice how it’s put together.
           </p>
           <p data-text="1">
             So before I build anything, I ask why it feels good and how I’d explain it. That way I always end up with work I can stand behind, down to the small details that make a product feel smooth.

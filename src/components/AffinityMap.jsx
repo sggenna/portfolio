@@ -1,11 +1,10 @@
 // The Diciobase affinity map, cut down to what each theme taught: the finding, the line that said it best, and two
-// of the observations behind it. The full wall had 140+ notes; this is the part worth reading.
+// of the observations behind it. Time and access has no quote here, since Daniela's opens the Research section. The full wall had 140+ notes; this is the part worth reading.
 const THEMES = [
   {
     name: 'Time and access',
     color: '#c99a1e',
     finding: 'The bottleneck was getting to the data at all.',
-    quote: 'I lose an hour before I even start.',
     notes: ['Logs in to each dictionary separately', 'Five browser tabs open at once'],
   },
   {
@@ -42,7 +41,7 @@ export default function AffinityMap({ label }) {
               {t.name}
             </h4>
             <p className="aff__finding">{t.finding}</p>
-            <blockquote className="aff__quote">“{t.quote}”</blockquote>
+            {t.quote && <blockquote className="aff__quote">“{t.quote}”</blockquote>}
             <ul className="aff__notes">
               {t.notes.map((n) => (
                 <li key={n}>{n}</li>

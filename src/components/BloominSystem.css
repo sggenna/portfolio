@@ -1,0 +1,79 @@
+/* The Bloomin' design system, drawn in code. No background of its own: tiles carry a light plum tint so they read
+   on whatever the case study sits on. Sizes follow the site; the whole thing restacks by its own width. */
+@font-face {
+  font-family: 'Geist Bloomin';
+  font-style: normal;
+  font-weight: 300 800;
+  font-display: swap;
+  src: url('/assets/bloomin/brand/geist-latin.woff2') format('woff2');
+}
+
+.bds {
+  --plum: #781444; --ink: #221419; --tint: rgba(120, 20, 68, .045); --line: rgba(34, 20, 25, .08);
+  container-type: inline-size;
+  display: flex; flex-direction: column; gap: 40px;
+  color: var(--ink);
+}
+/* The portfolio's own fonts throughout; only the type specimen shows Bloomin's Geist */
+.bds__tile--aa, .bds__tile--weights { font-family: 'Geist Bloomin', 'Helvetica Neue', Helvetica, Arial, sans-serif; }
+.bds__label { margin: 0 0 16px; font-size: 13px; line-height: 16px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--muted, #6b6b6b); }
+
+.bds__top { display: grid; grid-template-columns: minmax(0, 1fr); gap: 40px; }
+@container (min-width: 760px) { .bds__top { grid-template-columns: minmax(0, 360px) minmax(0, 1fr); gap: 40px; } }
+.bds__row { display: flex; gap: 16px; }
+.bds__tile { border-radius: 20px; background: var(--tint); min-height: 168px; display: flex; flex-direction: column; justify-content: center; }
+
+.bds__tile--aa { flex: 0 0 auto; width: 46%; align-items: center; gap: 8px; }
+.bds__aa { font-size: 64px; line-height: 1; font-weight: 600; letter-spacing: -.03em; }
+.bds__font { font-size: 15px; color: #5b4b51; }
+.bds__tile--weights { flex: 1; padding: 0 24px; gap: 8px; font-size: 19px; line-height: 26px; }
+
+.bds__tile--logo { flex: 1; align-items: center; padding: 24px; }
+.bds .bds__tile--logo img { width: min(100%, 260px); height: auto; display: block; }
+.bds__tile--mono { flex: 0 0 auto; width: 168px; align-items: center; background: #F6E4E6; }
+.bds .bds__tile--mono img { width: 80px; height: auto; display: block; }
+
+.bds__components { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 24px; }
+.bds__arrow { display: block; flex: none; }
+/* The case study's figure clips and stretches images; this one keeps its own sizes and its button shadow */
+.cs__fig:has(> .bds) { overflow: visible; border-radius: 0; }
+.bds__btn { display: inline-flex; align-items: center; gap: 16px; height: 52px; padding: 0 24px; border-radius: 999px; font-size: 16px; font-weight: 500; white-space: nowrap; }
+.bds__btn--primary { height: 60px; padding: 0 8px 0 24px; background: var(--plum); color: var(--white, #fffafc); }
+.bds__btn-dot { display: grid; place-items: center; width: 40px; height: 40px; margin-right: 2px; border-radius: 50%; background: var(--white, #fffafc); color: var(--plum); }
+.bds__btn--outline { height: 44px; padding: 0 24px; box-shadow: inset 0 0 0 1.5px var(--plum); color: var(--plum); }
+.bds__link { display: inline-flex; align-items: center; gap: 8px; color: var(--plum); font-size: 15px; font-weight: 500; white-space: nowrap; }
+.bds__link--rule { padding-bottom: 4px; border-bottom: 1px solid rgba(120, 20, 68, .3); }
+.bds__fab { display: grid; place-items: center; width: 56px; height: 56px; border-radius: 50%; background: var(--plum); color: var(--white, #fffafc); box-shadow: 0 12px 28px -8px rgba(120, 20, 68, .45); }
+.bds__circle { display: grid; place-items: center; width: 50px; height: 50px; border-radius: 50%; box-shadow: inset 0 0 0 1px rgba(34, 20, 25, .16); }
+.bds__dots { display: inline-flex; align-items: center; gap: 8px; }
+.bds__dots i { width: 6px; height: 6px; border-radius: 3px; background: rgba(34, 20, 25, .18); }
+.bds__dots i:first-child { width: 28px; background: var(--plum); }
+
+/* The palette slides past forever: two identical rows, moved by exactly one row's width, edges faded out. */
+.bds__marquee { overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
+.bds__track { display: flex; width: max-content; animation: bdsSlide 36s linear infinite; }
+.bds__swatches { display: flex; gap: 16px; margin: 0; padding: 0 16px 0 0; list-style: none; }
+.bds__swatch { display: flex; flex-direction: column; width: 134px; }
+.bds__chip { display: block; aspect-ratio: 1; border-radius: 16px; box-shadow: inset 0 0 0 1px var(--line); }
+.bds__swatch strong { margin-top: 12px; font-size: 14px; line-height: 18px; font-weight: 500; }
+.bds__swatch small { margin-top: 4px; font-size: 13px; line-height: 16px; color: var(--muted, #6b6b6b); }
+@keyframes bdsSlide { to { transform: translateX(-50%); } }
+
+@container (max-width: 520px) {
+  .bds { gap: 32px; }
+  .bds__tile { min-height: 132px; }
+  .bds__aa { font-size: 48px; }
+  .bds__tile--weights { padding: 0 16px; font-size: 15px; line-height: 21px; gap: 4px; }
+  .bds__tile--mono { width: 112px; }
+  .bds .bds__tile--mono img { width: 54px; }
+  .bds__swatch { width: 96px; }
+  .bds__components { gap: 12px 16px; }
+}
+
+/* Still for anyone who asks for less motion: one row, no slide, no fade */
+@media (prefers-reduced-motion: reduce) {
+  .bds__track { animation: none; width: auto; }
+  .bds__marquee { -webkit-mask-image: none; mask-image: none; }
+  .bds__swatches { flex-wrap: wrap; row-gap: 20px; padding: 0; }
+  .bds__swatches[aria-hidden] { display: none; }
+}

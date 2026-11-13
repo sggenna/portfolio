@@ -195,7 +195,7 @@ export default function App() {
           )}
           {active === 1 && <About photo={photo} onOpenPhoto={openPhoto} onClosePhoto={closePhoto} />}
           {active === 2 && <Play />}
-          {active !== 2 && <Footer />}
+          <Footer />
         </main>
 
         {project && (

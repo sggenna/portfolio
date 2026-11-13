@@ -4,7 +4,7 @@ export const SLOTS = {
   'about-portrait': '/assets/slots/about-portrait-v3.webp',
   'about-radio': '/assets/slots/about-radio-hd.webp',
   'about-cats': '/assets/slots/about-cats.webp',
-  'about-drawing': '/assets/slots/about-drawing-hd.webp',
+  'about-hiking': '/assets/slots/about-hiking-hd.webp',
   'about-sophia': '/assets/slots/about-sophia-hd.webp',
   'about-food': '/assets/slots/about-food-hd.webp',
   'about-colorstack': '/assets/slots/about-colorstack-hd.webp',

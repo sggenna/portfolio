@@ -7,7 +7,7 @@ export default function MobileHeader({ active, onNav }) {
       <Portrait touch className="mheader__avatar" />
       <div className="mheader__name">Genna Gonzaga</div>
       <div className="mheader__school">CS &amp; Visual Arts @ Columbia ’27</div>
-      <p className="mheader__bio">I’m a product designer and engineer who makes software that feels handmade, like a person made it for a person, whether that’s my friends or my&nbsp;grandma.</p>
+      <p className="mheader__bio">I’m a product designer, engineer, and artist. Drawing taught me to see everything as simple shapes, so I break complicated software down until it feels obvious.</p>
       <p className="mheader__now">
         <PulseDot />
         <span>Designing + Building @ Richemont</span>
