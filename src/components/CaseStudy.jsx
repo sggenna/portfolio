@@ -188,10 +188,15 @@ function Quote({ q, inline }) {
   );
 }
 
+// The problem opens the story as its own chapter, 01, before Research.
+const chaptersOf = (study) => (study.problem
+  ? [{ id: 'cs-problem', label: 'Problem', p: { lead: study.problem.h, text: study.problem.p } }, ...study.chapters]
+  : study.chapters);
+
 function Story({ study }) {
   return (
     <>
-      {study.chapters.map((c, n) => (
+      {chaptersOf(study).map((c, n) => (
         <section key={c.id} id={c.id} className="cs__section cs__section--ruled cs__section--story">
           <Label>{String(n + 1).padStart(2, '0')} / {c.label}</Label>
           {c.rows?.map((r) => (r.h || r.p || r.media ? (
@@ -286,7 +291,7 @@ export default function CaseStudy({ project, upNext, phase, full, onToggleFull, 
 
   const study = STUDIES[project.key];
   const sections = study
-    ? [{ id: 'cs-summary', label: 'Summary' }, ...study.chapters]
+    ? [{ id: 'cs-summary', label: 'Summary' }, ...chaptersOf(study)]
     : SECTIONS;
   const meta = study ? study.meta : [
     { l: 'Role', v: 'Product designer & engineer' },
