@@ -65,8 +65,8 @@ export default function Toc({ items, scrollerRef, variant }) {
       if (!r || !link) return;
       const top = link.getBoundingClientRect().top - r.getBoundingClientRect().top;
       if (thumb.current) {
-        thumb.current.style.transform = `translateY(${top + 4}px)`;
-        thumb.current.style.height = `${Math.max(0, link.offsetHeight - 8)}px`;
+        // Move and size it with one transform; its CSS height is a 100px base.
+        thumb.current.style.transform = `translateY(${top + 4}px) scaleY(${Math.max(0, link.offsetHeight - 8) / 100})`;
       }
       // How far through the active section we are, for the ruler's glowing head.
       const i = items.findIndex((it) => it.id === current);

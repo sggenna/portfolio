@@ -156,7 +156,7 @@ export default function Sidebar({ active, onNav, lookRight }) {
       <div className="sidebar__name">Genna Gonzaga</div>
       <p className="sidebar__school">CS &amp; Visual Arts @ Columbia ’27</p>
       <p className="sidebar__bio" data-text="1">
-        I’m a product designer and engineer who likes to make software feel handmade.
+        I’m a product designer, engineer, and artist. Drawing taught me to see everything as simple shapes, so I break complicated software down until it feels obvious.
       </p>
       <p className="sidebar__now">
         <PulseDot />
