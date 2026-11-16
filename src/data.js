@@ -157,7 +157,7 @@ export const STUDIES = {
       alt: 'A tour of Diciobase: searching saudade from the orbit home page, switching its entry between three dictionaries, seeing where they agree on a meaning, and following the synonym nostalgia to its own entry.',
     },
     problem: { h: 'One word took 23 steps.', p: 'Linguists checked dictionaries book by book, and only 4 of those steps were actual research.' },
-    tldr: 'Diciobase is a dictionary platform for linguists. You search a Portuguese word once and see what several dictionaries say about it, each in its own original structure.',
+    tldr: 'Diciobase is a dictionary platform for linguists. You search a Portuguese word once and see what several dictionaries say about it, each in its own original structure. It brings together dictionaries for 5+ international institutions, and I tested it with 15 linguists, researchers, and librarians.',
     stats: [
       { v: '4 min', l: 'Per lookup in early tests', dir: 'down' },
       { v: '23 → 1', l: 'Steps to one search' },
@@ -268,7 +268,7 @@ export const STUDIES = {
           },
           {
             h: 'What I’d test next',
-            p: 'Diciobase is still a work in progress, and testing so far has been early. Next, I want to see how researchers use Estrutura over longer sessions, and whether compare earns its way back once more dictionaries come in.',
+            p: 'Diciobase is still a work in progress, and I’ve only tested it with 15 people so far. Next, I want to see how researchers use Estrutura over longer sessions, and whether compare earns its way back once more dictionaries come in.',
           },
         ],
       },
@@ -281,14 +281,14 @@ export const STUDIES = {
       { l: 'Role', v: 'Brand designer, product designer and developer' },
       { l: 'Client', v: 'Professora Jamile Oliveira' },
       { l: 'Timeline', v: 'January 2025 – March 2026' },
-      { l: 'Tools', v: 'Figma, React, Claude Code' },
+      { l: 'Tools', v: 'Figma, Figma Make, React, Claude Code' },
     ],
     hero: { video: '/assets/bloomin/site-scroll.mp4', poster: '/assets/bloomin/site-scroll-poster.webp', phoneVideo: '/assets/bloomin/site-scroll-phone.mp4', phonePoster: '/assets/bloomin/site-scroll-phone-poster.webp', ratio: '16 / 10', phoneRatio: '390 / 844', big: true, bare: true, alt: 'Scrolling through the Bloomin’ landing page, from the hero through courses, Jamile, how classes work, testimonials, the FAQ and contact' },
     problem: { h: 'A school with no name.', p: 'Jamile ran her school from an Instagram page and answered the same six questions in her DMs every day.' },
     tldr: 'Jamile runs an online English school. I named it, designed the brand, and built a mobile-first landing page that answers students’ most common questions. Now I’m designing the platform her students learn on.',
     stats: [
-      { v: '20%', l: 'Enrolled students', dir: 'up' },
-      { v: '80%', l: 'Repeat questions in DMs', dir: 'down' },
+      { v: '20%', l: 'More enrolled students', dir: 'up' },
+      { v: '80%', l: 'Fewer repeat questions in DMs', dir: 'down' },
     ],
     chapters: [
       {
@@ -480,7 +480,7 @@ export const NAV_PATHS = ['/', '/about', '/play'];
 
 export const EXPERIENCE = [
   { id: 'logo-richemont', org: 'Richemont', role: 'Software engineering intern', when: 'JUN 2026–NOW', href: 'https://www.richemont.com' },
-  { id: 'logo-bloomin', org: "Bloomin'", role: 'Founding product designer', when: 'JAN 2025–NOW', href: '#' },
+  { id: 'logo-bloomin', org: "Bloomin'", role: 'Product designer (contract)', when: 'JAN 2025–NOW', href: '#' },
   { id: 'logo-formas', org: 'FORMAS Research Lab, UFBA', role: 'Researcher and product designer', when: 'JUN 2025–MAY 2026', href: '#' },
 ];
 
